@@ -1,0 +1,331 @@
+
+\chapter{Delineamento Metodológico}\label{delineamento}
+
+Nesta seção, são discutidos os procedimentos utilizados para o desenvolvimento do estudo, incluindo a descrição das bases de dados utilizadas e como foram construídas, o processo de rotulação, as técnicas de pré-processamento aplicadas e os protocolos de experimentação adotados. O objetivo principal deste trabalho é analisar a eficácia de diferentes estratégias de pré-processamento textual na análise de sentimentos aplicada a comentários de filmes, utilizando e comparando algoritmos clássicos de classificação supervisionada e técnicas de ensemble learning. A pesquisa tem natureza experimental, com foco na aplicação prática de algoritmos, bem como na avaliação de desempenho das estratégias de pré-processamento e dos modelos utilizados.
+
+\section{Base de dados}\label{base_de_dados}
+
+Duas bases de dados compostas por comentários de filmes foram utilizadas neste estudo: uma proveniente do Letterboxd e outra do IMDb.
+
+
+\subsection{LETTERBOXD}\label{letterboxd}
+
+A primeira base de dados foi composta por comentários e notas de usuários da plataforma Letterboxd. Inicialmente, foram coletados 150.000 comentários por meio de um crawler desenvolvido em Python, utilizando a biblioteca Selenium. A extração foi realizada a partir das avaliações de 50 filmes diversos disponíveis na plataforma.
+
+Os comentários estavam em vários idiomas, sendo a maioria em inglês. Para garantir a uniformidade linguística da base, foram utilizados apenas os comentários em inglês. Para isso, os dados foram separados em duas bases uma com comentários em inglês e outra com os demais idiomas utilizando a biblioteca langdetect, também em Python. Cada comentário vinha acompanhado de uma nota atribuída pelo usuário, variando de 0.5 a 5 estrelas. Comentários sem nota receberam, inicialmente, o valor 0 durante a extração, mas foram posteriormente removidos.
+
+Após os tratamentos descritos, a base final contou com 114.817 comentários em inglês. A rotulação dos sentimentos foi feita com base nas notas atribuídas pelos usuários, utilizando o seguinte critério:
+
+\begin{itemize}
+	\item Positivo: Comentários com nota igual ou superior a 3
+	
+	\item Negativo: Comentários com nota inferior a 3.
+	
+\end{itemize}
+
+Essa estratégia de rotulação reflete uma suposição comum em análise de sentimentos, segundo a qual notas mais altas indicam sentimentos positivos e notas baixas indicam sentimentos negativos. Essa abordagem permite a construção de um conjunto de dados rotulado de forma automática, facilitando o treinamento dos modelos de classificação.
+
+
+\subsection{IMDB}\label{imdb}
+
+A segunda base de dados foi obtida do IMDb (Internet Movie Database) e é amplamente utilizada na literatura sobre análise de sentimentos. Diferentemente da base do Letterboxd, essa base já se encontra pré-processada e rotulada, o que elimina a necessidade de rotulação manual. Ela contém 50.000 avaliações de filmes, com classificações binárias (positivo ou negativo), sendo comumente utilizada como benchmark em tarefas de classificação de sentimentos.
+
+A base do IMDb complementa a do Letterboxd ao oferecer uma maior diversidade de estilos de escrita, formatos de comentários e temas de filmes, o que é essencial para testar a capacidade de generalização dos modelos. A combinação dessas duas fontes de dados permite uma análise mais robusta e abrangente.
+
+
+
+\section{TÉCNICAS DE PRÉ-PROCESSAMENTO}\label{pre-processamento}
+
+A construção de modelos de classificação baseados em texto requer a aplicação de técnicas de pré-processamento, que têm um impacto direto na performance dos algoritmos. Estudos demonstram que a aplicação adequada dessas técnicas pode melhorar significativamente os resultados obtidos \cite{almeida2023exploring}. As técnicas utilizadas neste trabalho foram: Remoção de caracteres especiais e emojis, remoção das stopwords, Lemmatization e Stemming. Durante essa etapa é importante apontar que também foi utilizada uma etapa de pré-processamento chamada lowercase, que foi a de deixar todas em minúsculas, que foi aplicada em todos.
+
+Caracteres especiais são símbolos não alfanuméricos, como pontuações (!.,?), símbolos (@"(/), entre outros \cite{brandao2023impacto}. Já os emojis são representações gráficas de emoções, objetos, lugares, etc., podendo ser compostos por códigos Unicode ou combinações de caracteres \cite{paula2019quantificando}. A remoção desses elementos visa gerar um texto mais limpo, excluindo itens que não agregam valor semântico relevante à tarefa de análise de sentimentos. Essa etapa foi implementada com o uso de expressões regulares (regex), utilizando a biblioteca re do Python.
+
+Stopwords são palavras muito comuns em um idioma como artigos, preposições e pronomes que geralmente não contribuem significativamente para a compreensão do conteúdo semântico do texto. A remoção dessas palavras permite concentrar a análise nas informações mais relevantes \cite{kaur2018systematic}. Para isso, utilizou-se a biblioteca NLTK, que disponibiliza listas de stopwords para diversos idiomas, tendo sido utilizada, neste caso, a lista em inglês.
+
+A lematização (\textit{lemmatization}) consiste em reduzir uma palavra à sua forma base, considerando seu contexto gramatical e semântico. Por exemplo, as palavras “correu” e “corrida” são ambas reduzidas à forma base “correr” \cite{brandao2023impacto}. Essa técnica reduz a variabilidade linguística e facilita a identificação de padrões pelos modelos. A lematização foi realizada com o auxílio da biblioteca NLTK.
+
+O \textit{stemming} é uma técnica que reduz palavras aos seus radicais, por meio da remoção de sufixos e prefixos, sem considerar o contexto semântico \cite{souza2021assessing}. Por exemplo, as palavras “correu” e “corrida” seriam reduzidas ao radical “corr”. Assim como a lematização, essa técnica busca reduzir a variabilidade linguística, mas de forma mais simplificada. Também foi utilizada a biblioteca NLTK para a implementação dessa etapa. 
+
+
+ 
+\section{Protocolo de experimentos}\label{protocolo}
+
+Nesta seção, são descritas as ferramentas, técnicas e procedimentos utilizados para treinar, ajustar e avaliar os modelos propostos.
+
+\subsection{DIVISÃO DOS DADOS}
+
+Em cada uma das bases (Letterboxd e IMDb) foram divididas em três subconjuntos distintos:
+
+
+\begin{itemize}
+	
+	\item 80\% para o conjunto de treino, utilizado no treinamento dos modelos;
+	
+	
+	\item 10\% para validação, utilizado para ajuste de hiperparâmetros e seleção de modelos;
+	
+	
+	\item 10\% para teste, utilizado para avaliar o desempenho final dos modelos.
+	
+	
+\end{itemize}
+
+Essa divisão foi feita de forma estratificada, garantindo que a proporção entre classes fosse mantida em cada subconjunto. Foi utilizada a função \texttt{train\_test\_split} da biblioteca \texttt{Scikit-learn} da linguagem \texttt{Python}.
+
+
+\subsection{FERRAMENTAS E BIBLIOTECAS}\label{ferramentas}
+
+Todos os experimentos foram realizados utilizando a linguagem de programação \texttt{Python} com o ambiente de desenvolvimento sendo o \texttt{Jupyter Notebook}. As bibliotecas e \textit{frameworks} adotados foram: \texttt{Scikit-learn} para a implementação dos algoritmos de \textit{machine learning} e validação cruzada; \texttt{NLTK} que é uma biblioteca de pré-processamento textual; \textit{Optuna} que é uma biblioteca do Python para otimização de hiperparâmetros; \texttt{Selenium} que foi a biblioteca utilizada para o \textit{crawler} pegar os dados da plataforma \texttt{Letterboxd}; e \texttt{Pandas} para manipulação de dados.
+
+\subsection{REPRESENTAÇÃO DOS DADOS}\label{representação_dados}
+
+Após o pré-processamento textual, os comentários foram convertidos em representações numéricas por meio da técnica \texttt{TF-IDF} (\textit{Term Frequency–Inverse Document Frequency}). Essa técnica calcula a frequência relativa de uma palavra em um documento em comparação à sua frequência em todo o \textit{corpus}, atribuindo pesos maiores às palavras mais relevantes e penalizando termos muito frequentes.
+
+Essa representação permite que os algoritmos de classificação se concentrem em termos informativos e discriminativos para a tarefa de análise de sentimentos. A implementação foi realizada por meio da função \texttt{TfidfVectorizer}, da biblioteca \texttt{Scikit-learn}.
+
+\subsection{VALIDAÇÃO CRUZADA E AJUSTE DE HIPERPARÂMETROS}\label{validaçao_hiperparametros}
+
+Com o objetivo de garantir robustez na otimização dos hiperparâmetros, foi adotado o método de validação cruzada estratificada com 5 \textit{folds} (\textit{k}=5), utilizando a classe \texttt{StratifiedKFold} da biblioteca \texttt{Scikit-learn} para . A estratificação assegura que a proporção entre as classes seja preservada em cada subdivisão dos dados, evitando viés.
+
+Para o ajuste dos hiperparâmetros, utilizou-se a técnica de otimização automática fornecida pelo framework \textit{Optuna}. A escolha por esse framework deve-se ao fato de que métodos tradicionais, como \textit{grid search} e \textit{random search}, tendem a ser menos eficientes e significativamente mais lentos quando comparados ao processo de otimização baseado em busca bayesiana e seleção adaptativa utilizado pelo \textit{Optuna}.
+
+A otimização foi realizada de forma independente para cada conjunto de dados (\textit{Letterboxd} com pré-processamento, \textit{Letterboxd} sem pré-processamento, \textit{IMDb} com pré-processamento e \textit{IMDb} sem pré-processamento). Em cada cenário, o \textit{Optuna} executou 30 tentativas (\textit{trials}) por modelo, buscando maximizar as métricas de desempenho definidas. Esse processo resultou em um conjunto de hiperparâmetros ótimo para cada algoritmo avaliado, os quais são apresentados nas tabelas a seguir:
+
+
+\begin{table}[H]
+	\centering
+	\caption{Hiperparâmetros otimizados — Letterboxd com pré-processamento}
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Modelo} & \textbf{Hiperparâmetros} \\
+		\midrule
+		
+		Naive Bayes & alpha = 0.6758407653651551 \\
+		\midrule
+		
+		Logistic Regression & 
+		C = 0.6246792786048405, penalty = l2 \\
+		\midrule
+		
+		SVM Linear & 
+		C = 0.06013530856715907, loss = squared\_hinge \\
+		\midrule
+		
+		Random Forest & 
+		n\_estimators = 115, max\_depth = 30, min\_samples\_split = 2, min\_samples\_leaf = 1 \\
+		\midrule
+		
+		KNN &
+		n\_neighbors = 5, weights = distance, p = 2 \\
+		\midrule
+		
+		MLP &
+		hidden\_layer\_sizes = (100, 50), learning\_rate\_init = 0.00014744878823096062,
+		alpha = 0.000025996826132761928, max\_iter = 370 \\
+		\midrule
+		
+		Decision Tree &
+		max\_depth = 20, min\_samples\_split = 4, criterion = gini \\
+		\midrule
+		
+		LightGBM &
+		num\_leaves = 36, learning\_rate = 0.09677801420002084, n\_estimators = 238,
+		max\_depth = 9, subsample = 0.6292147199320182, colsample\_bytree = 0.8785528356077164 \\
+		\midrule
+		
+		AdaBoost &
+		n\_estimators = 300, learning\_rate = 0.7947974759368932 \\
+		\midrule
+		
+		SGD & 
+		loss = modified\_huber, alpha = 0.0002752762905896779 \\
+		
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Hiperparâmetros otimizados — Letterboxd sem pré-processamento}
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Modelo} & \textbf{Hiperparâmetros} \\
+		\midrule
+		
+		Naive Bayes & alpha = 0.9737981758173101 \\
+		\midrule
+		
+		Logistic Regression & 
+		C = 0.5838191361607037, penalty = l2 \\
+		\midrule
+		
+		SVM Linear &
+		C = 0.4765256659616241, loss = hinge \\
+		\midrule
+		
+		Random Forest &
+		n\_estimators = 198, max\_depth = 30, min\_samples\_split = 4, min\_samples\_leaf = 1 \\
+		\midrule
+		
+		KNN &
+		n\_neighbors = 5, weights = distance, p = 2 \\
+		\midrule
+		
+		MLP &
+		hidden\_layer\_sizes = (50, 50), learning\_rate\_init = 0.00010400993294201546,
+		alpha = 0.008482443671690949, max\_iter = 482 \\
+		\midrule
+		
+		Decision Tree &
+		max\_depth = 19, min\_samples\_split = 6, criterion = gini \\
+		\midrule
+		
+		LightGBM &
+		num\_leaves = 45, learning\_rate = 0.09929154892388725, n\_estimators = 276,
+		max\_depth = 10, subsample = 0.726920757114998, colsample\_bytree = 0.8424583748814402 \\
+		\midrule
+		
+		AdaBoost &
+		n\_estimators = 299, learning\_rate = 0.6456811835697023 \\
+		\midrule
+		
+		SGD &
+		loss = log\_loss, alpha = 0.000017434558411956835 \\
+		
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Hiperparâmetros otimizados — IMDb com pré-processamento}
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Modelo} & \textbf{Hiperparâmetros} \\
+		\midrule
+		
+		Naive Bayes & alpha = 0.02927511356754202 \\
+		\midrule
+		
+		Logistic Regression & 
+		C = 1.661735240578435, penalty = l2 \\
+		\midrule
+		
+		SVM Linear &
+		C = 0.5097630076639009, loss = hinge \\
+		\midrule
+		
+		Random Forest &
+		n\_estimators = 299, max\_depth = 30, min\_samples\_split = 3, min\_samples\_leaf = 1 \\
+		\midrule
+		
+		KNN &
+		n\_neighbors = 15, weights = uniform, p = 2 \\ 
+		\midrule
+		
+		MLP &
+		hidden\_layer\_sizes = (100,), learning\_rate\_init = 0.0007955551045346731,
+		alpha = 0.0025435382319358075, max\_iter = 471 \\
+		\midrule
+		
+		Decision Tree &
+		max\_depth = 18, min\_samples\_split = 6, criterion = gini \\
+		\midrule
+		
+		LightGBM &
+		num\_leaves = 27, learning\_rate = 0.08289881794330034, n\_estimators = 266,
+		max\_depth = 8, subsample = 0.8134698312657079, colsample\_bytree = 0.6418085519195297 \\
+		\midrule
+		
+		AdaBoost &
+		n\_estimators = 159, learning\_rate = 0.8314950879497945 \\
+		\midrule
+		
+		SGD &
+		loss = modified\_huber, alpha = 0.00003544253928216622 \\
+		
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Hiperparâmetros otimizados — IMDb sem pré-processamento}
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Modelo} & \textbf{Hiperparâmetros} \\
+		\midrule
+		
+		Naive Bayes & alpha = 0.9153390147081293 \\
+		\midrule
+		
+		Logistic Regression & 
+		C = 1.2968000704228235, penalty = l2 \\
+		\midrule
+		
+		SVM Linear &
+		C = 0.11110818042262983, loss = squared\_hinge \\
+		\midrule
+		
+		Random Forest &
+		n\_estimators = 397, max\_depth = 30, min\_samples\_split = 6, min\_samples\_leaf = 2 \\
+		\midrule
+		
+		KNN &
+		n\_neighbors = 14, weights = distance, p = 2 \\
+		\midrule
+		
+		MLP &
+		hidden\_layer\_sizes = (50, 50), learning\_rate\_init = 0.0004978496912038466,
+		alpha = 0.00012550127377080177, max\_iter = 486 \\
+		\midrule
+		
+		Decision Tree &
+		max\_depth = 20, min\_samples\_split = 4, criterion = gini \\
+		\midrule
+		
+		LightGBM &
+		num\_leaves = 25, learning\_rate = 0.05767611522807929, n\_estimators = 300,
+		max\_depth = 8, subsample = 0.8790404915770229, colsample\_bytree = 0.6497297150122884 \\
+		\midrule
+		
+		AdaBoost &
+		n\_estimators = 296, learning\_rate = 0.7201004649039641 \\
+		\midrule
+		
+		SGD &
+		loss = modified\_huber, alpha = 0.00018257582631215738 \\
+		
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+
+
+
+\subsection{FLUXOGRAMA DOS EXPERIMENTOS}\label{fluxograma}
+
+A imagem abaixo mostra o fluxo que o trabalho irá seguir:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.05\textwidth]{diagrama.png}
+	\caption{Fluxograma do seguimento do trabalho. Fonte: Elaborado pelo autor}
+	\label{fig:html}
+\end{figure}
+
+O processo experimental inicia-se com a seleção e preparação dos conjuntos de dados. Foram utilizadas duas fontes principais: a base \texttt{IMDb}, previamente estruturada e rotulada, e a base construída a partir de comentários extraídos do \texttt{Letterboxd} por meio de um \textit{crawler} em \texttt{Python}, com o auxílio da biblioteca \texttt{Selenium}.
+
+Após a coleta, os dados passam por um processo de pré-processamento, que inclui a remoção de \textit{stopwords}, \textit{emojis} e caracteres especiais, \textit{stemming} e conversão para letras minúsculas (\textit{lowercase}). Em seguida, os textos são transformados em vetores numéricos utilizando o \textit{TF-IDF} (\textit{Term Frequency-Inverse Document Frequency}), por meio do \texttt{TfidfVectorizer} da biblioteca \texttt{Scikit-learn}. 
+
+Com os dados vetorizados, é feita a otimização dos hiperparâmetros com o \textit{Optuna}, onde serão selecionados os hiperparâmetros ótimos para o treinamento dos modelos. Para essa otimização, foi utilizada a validação cruzada com ($k=5$).
+
+Posteriormente, os dados são divididos em três subconjuntos: 80\% para treinamento, 10\% para validação e 10\% para teste, com estratificação para preservar o equilíbrio entre as classes.
+
+Na etapa seguinte, são implementados e treinados algoritmos clássicos de classificação supervisionada, como \textit{Naive Bayes}, \textit{SVM}, \textit{Regressão Logística}, \textit{MLP (Multi-Layer Perceptron)}, \textit{Decision Tree}, \textit{AdaBoost}, \textit{LightGBM}, \textit{SGD (Stochastic Gradient Descent)}, \textit{KNN} e \textit{Random Forest}. Esses modelos resultantes compõem um \textit{pool de classificadores}.
+
+A partir do \textit{pool de classificadores}, são selecionados os modelos mais promissores para a composição dos \textit{ensembles} heterogêneos, por meio da Seleção por Acurácia (SA) e Seleção por Acurácia e Diversidade (SAD). Gerando, assim, os \textit{ensembles} que foram criados a quantidade de modelos [2, 3, 4, 5], já que em \textcite{dietterich2000ensemble, kuncheva2004classifier} é falo que ensembles com poucos modelos performam muito proximo ou igual a que tem muitos modelos, além dos \textit{ensembles} com todos os modelos, que ficou chamado de Sem Seleção (SS). Esses \textit{ensembles} combinam as previsões dos modelos base, gerando decisões mais robustas. 
+
+Por fim, os \textit{ensembles} são avaliados com base no conjunto de teste final, utilizando métricas de avaliação como acurácia, precisão, revocação (\textit{recall}) e \textit{F1-score}.

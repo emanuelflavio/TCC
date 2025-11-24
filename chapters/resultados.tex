@@ -1,0 +1,768 @@
+
+\chapter{Resultados e Discursões}\label{resultados}
+
+Nesta seção, são apresentados todos os dados e resultados obtidos ao longo dos experimentos. Primeiro, descrevem-se as métricas de avaliação dos modelos de classificação individuais utilizados no estudo. Em seguida, são exibidas as métricas dos ensembles construídos por meio das diferentes estratégias de seleção. Por fim, são realizadas comparações entre os modelos e discutidos os resultados observados, destacando o impacto das técnicas aplicadas no desempenho final.  
+
+\section{Desempenhos dos modelos individuais}
+
+Foram avaliados dez modelos de classificação em quatro cenários distintos: Letterboxd com pré-processamento, Letterboxd sem pré-processamento, IMDb sem pré-processamento e IMDb com pré-processamento.
+
+Nos resultados obtidos, já podemos perceber as diferenças de desempenho entre os modelos e o impacto do pré-processamento sobre a eficácia dos algoritmos.
+
+As tabelas a seguir detalham os resultados obtidos para cada cenário, apresentando as métricas de avaliação: Precisão, Recall e F1-Score para as classes Negativa e Positiva.
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas dos Modelos Individuais(Letterborxd - Com Pré-Processamento	)}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lcccccc}
+			\toprule
+			\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+			\midrule
+			K-Nearest Neighbors & 0.54 & 0.75 & 0.63 & 0.67 & 0.43 & 0.52 \\
+			Naive Bayes & 0.79 & 0.78 & 0.78 & 0.81 & 0.82 & 0.81 \\
+			Regressão Logística & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
+			SGD & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+			SVM Linear & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
+			Random Forest & 0.78 & 0.69 & 0.73 & 0.75 & 0.83 & 0.79 \\
+			LightGBM & 0.77 & 0.80 & 0.78 & 0.81 & 0.79 & 0.80 \\
+			AdaBoost & 0.74 & 0.81 & 0.77 & 0.81 & 0.75 & 0.78 \\
+			Multi-Layer Perceptron & 0.77 & 0.81 & 0.79 & 0.82 & 0.79 & 0.80 \\
+			Decision Tree & 0.60 & 0.84 & 0.70 & 0.78 & 0.49 & 0.61 \\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+No cenário da base Letterboxd com pré-processamento, pode-se observar que os \textit{modelos lineares} apresentaram métricas melhores que os de outro tipo. Os modelos \textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD} apresentaram F1-Scores entre \textit{0.80} e \textit{0.82}, tanto para a classe positiva quanto para a negativa. Quanto aos modelos que não tiveram uma boa performance, destacam-se \textit{KNN} e a \textit{Decision Tree}, com F1-Scores entre \textit{0.52} e \textit{0.70}.
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas dos Modelos Individuais(Letterboxd - Sem Pré-Processamento)}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lcccccc}
+			\toprule
+			\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+			\midrule
+			Naive Bayes & 0.79 & 0.77 & 0.78 & 0.80 & 0.82 & 0.81 \\
+			Regressão Logística & 0.80 & 0.79 & 0.79 & 0.82 & 0.82 & 0.82 \\
+			SVM Linear & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+			Random Forest & 0.79 & 0.66 & 0.72 & 0.74 & 0.84 & 0.79 \\
+			K-Nearest Neighbors & 0.56 & 0.71 & 0.62 & 0.66 & 0.50 & 0.57 \\
+			Multi-Layer Perceptron & 0.77 & 0.78 & 0.78 & 0.81 & 0.79 & 0.80 \\
+			Decision Tree & 0.71 & 0.42 & 0.53 & 0.63 & 0.85 & 0.72 \\
+			LightGBM & 0.77 & 0.80 & 0.79 & 0.82 & 0.79 & 0.81 \\
+			AdaBoost & 0.74 & 0.79 & 0.77 & 0.80 & 0.76 & 0.78 \\
+			SGD & 0.79 & 0.80 & 0.80 & 0.82 & 0.81 & 0.82 \\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+No da base Letterboxd sem pré-processamento, pode-se observar melhorias nos resultados. Os modelos lineares ainda foram superiores, com F1-Scores próximos a \textit{0.82}. Isso sugere que o pré-processamento aplicado pode ter removido informações relevantes do texto, ou seja, a remoção de palavras neste caso prejudicou o desempenho do modelo. Os modelos \textit{KNN} e \textit{Decision Tree} ainda tiveram um desempenho abaixo, e os demais foram intermediários.
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas dos Modelos Individuais(IMDB - Com Pré-Processamento)}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lcccccc}
+			\toprule
+			\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+			\midrule
+			Naive Bayes & 0.87 & 0.83 & 0.85 & 0.84 & 0.88 & 0.86 \\
+			Regressão Logística & 0.90 & 0.88 & 0.89 & 0.88 & 0.90 & 0.89 \\
+			SVM Linear & 0.91 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			Random Forest & 0.87 & 0.82 & 0.84 & 0.83 & 0.87 & 0.85 \\
+			K-Nearest Neighbors & 0.78 & 0.63 & 0.70 & 0.69 & 0.82 & 0.75 \\
+			Multi-Layer Perceptron & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 \\
+			Decision Tree & 0.76 & 0.66 & 0.71 & 0.70 & 0.79 & 0.74 \\
+			LightGBM & 0.88 & 0.85 & 0.86 & 0.85 & 0.89 & 0.87 \\
+			AdaBoost & 0.86 & 0.83 & 0.85 & 0.84 & 0.87 & 0.85 \\
+			SGD & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 \\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+Na base do IMDb sem pré-processamento, que é uma base mais estruturada, os modelos apresentaram desempenhos significativamente melhores. No entanto, os modelos lineares ainda foram superiores: \textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD} obtiveram um F1-Score de aproximadamente \textit{0.89}. Isso pode ser explicado pela qualidade da base de dados, que tem menos ruído. Os modelos \textit{KNN} e \textit{Decision Tree} continuaram sendo os piores, com F1-Scores na faixa dos \textit{0.70}.
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas dos Modelos Individuais(IMDB - Sem Pré-Processamento)}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lcccccc}
+			\toprule
+			\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+			\midrule
+			Naive Bayes & 0.87 & 0.84 & 0.86 & 0.84 & 0.88 & 0.86 \\
+			Regressão Logística & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			SVM Linear & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			Random Forest & 0.87 & 0.81 & 0.84 & 0.82 & 0.88 & 0.85 \\
+			K-Nearest Neighbors & 0.74 & 0.69 & 0.71 & 0.71 & 0.75 & 0.73 \\
+			Multi-Layer Perceptron & 0.88 & 0.86 & 0.87 & 0.86 & 0.88 & 0.87 \\
+			Decision Tree & 0.79 & 0.64 & 0.71 & 0.70 & 0.83 & 0.76 \\
+			LightGBM & 0.88 & 0.84 & 0.86 & 0.85 & 0.89 & 0.87 \\
+			AdaBoost & 0.87 & 0.84 & 0.86 & 0.85 & 0.88 & 0.86 \\
+			SGD & 0.91 & 0.86 & 0.89 & 0.87 & 0.92 & 0.89 \\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+Por fim, na base do IMDb com pré-processamento, pode-se observar que as métricas dos melhores modelos foram praticamente idênticas às do cenário sem pré-processamento. Isso indica que a base do IMDb já é bem estruturada e suficientemente limpa para que o pré-processamento adicional não traga benefícios e nem prejudique. Os mesmos modelos foram superiores (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}), com valores entre \textit{0.88} e \textit{0.89}, enquanto o \textit{KNN} e a \textit{Decision Tree} ainda foram os menos eficazes.
+
+Em resumo, os resultados demonstram que \textit{classificadores lineares} (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}) são os mais adequados para a tarefa de análise de sentimento utilizando a representação \textit{TF-IDF}, mostrando eficácia superior tanto em bases menores (Letterboxd) quanto em bases maiores e mais estruturadas (IMDb).
+
+Os modelos \textit{KNN} e \textit{Decision Tree} apresentaram um desempenho consistentemente inferior em todos os cenários. Contudo, seu uso foi relevante ao contribuir com a \textit{diversidade de métodos} nos esquemas de \textit{ensemble}.
+
+Já os modelos baseados em árvores (\textit{Random Forest}, \textit{LightGBM} e \textit{AdaBoost}) exibiram um desempenho intermediário, porém satisfatório, posicionando-se como opções robustas.
+
+Tais achados reforçam o que é estabelecido na literatura: \textit{modelos lineares são frequentemente superiores} quando se trata de classificação textual com TF-IDF. Além disso, a análise evidenciou o \textit{impacto variável do pré-processamento} em diferentes bases, podendo prejudicar, melhorar ou não ter efeito, dependendo da base.
+
+
+
+\section{DESEMPENHO DOS ENSEMBLES SEM SELEÇÃO}
+
+Uma das etapas dos experimentos foi a avaliação do ensemble sem seleção, com o objetivo de observar o comportamento e como a \textit{diversidade de modelos} impacta a performance do ensemble tanto no \textit{Voting} quanto no \textit{Stacking}.
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles com 10 Modelos Base(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.77 & 0.83 & 0.80 & 0.84 & 0.78 & 0.81 \\
+		Stacking & 0.80 & 0.81 & 0.81 & 0.83 & 0.82 & 0.83 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Na base \textit{Letterboxd com pré-processamento}, os resultados mostraram que o \textit{Stacking} obteve um desempenho superior, conseguindo atingir um F1-Score de \textit{0.81} e \textit{0.83} nas duas classes, enquanto o \textit{Voting} obteve valores de \textit{0.80} e \textit{0.81}. O Stacking foi capaz de aproveitar melhor essa diferença entre os modelos.
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles com 10 Modelos Base(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.81 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		Stacking & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Na versão \textit{sem pré-processamento} da Letterboxd, ambos os ensembles obtiveram desempenho semelhante, com F1-Scores entre \textit{0.80} e \textit{0.82}. O Stacking ainda apresentou um leve ganho na classe positiva, mas a diferença geral foi menor do que a observada no cenário com pré-processamento.
+
+\begin{table}[ht]
+	\centering
+	\caption{Métricas para Ensembles com 10 Modelos Base(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.90 \\
+		Stacking & 0.90 & 0.89 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+Na base \textit{IMDb sem pré-processamento}, os ensembles atingiram ótimos resultados. Tanto o \textit{Voting} quanto o \textit{Stacking} alcançaram F1-Scores próximos de \textit{0.90}. O Stacking ainda apresentou um leve ganho, mas, na prática, ambos os métodos tiveram desempenho muito similar.
+ 
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas dos Ensembles com 10 Modelos Base(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados foram bem parecidos com os do cenário sem pré-processamento, porém houve um leve ganho tanto no Voting quanto no Stacking. Com isso, confirma-se que o desempenho na base IMDb \textit{não é fortemente influenciado pelo pré-processamento}, e ensembles de grande porte podem ser \textit{robustos} mesmo com variações no tratamento do texto.
+
+\section{SELEÇÃO POR ACURÁCIA}
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
+2 modelos
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 2 modelos: Regressão Logística, SVM Linear (Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.80 & 0.80 & 0.83 & 0.82 & 0.82 \\
+		Stacking & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 2 modelos: SVM Linear e SGD (Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.78 & 0.81 & 0.80 & 0.83 & 0.80 & 0.82 \\
+		Stacking & 0.79 & 0.80 & 0.79 & 0.82 & 0.81 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 2 modelos: SVM Linear e Regressão Logística (IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.89 \\
+		Stacking & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.89 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA (2 modelos): SVM Linear e Regressão Logística (IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.91 & 0.90 & 0.91 & 0.89 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
+3 modelos 
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 3 modelos: Regressão Logística, SVM Linear, SGD(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+		Stacking & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 3 modelos: SVM Linear, SGD, Regressão Logística(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.80 & 0.79 & 0.82 & 0.82 & 0.82 \\
+		Stacking & 0.79 & 0.80 & 0.79 & 0.82 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 3 modelos: SVM Linear, Regressão Logística, SGD (IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 3 modelos: SVM Linear, Regressão Logística, SGD (IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
+4 modelos 
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 4 modelos: Regressão Logística, SVM Linear, SGD, Naive Bayes(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.81 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		Stacking & 0.80 & 0.80 & 0.80 & 0.82 & 0.83 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 4 modelos: SVM Linear, SGD, Regressão Logística, LightGBM(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.81 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		Stacking & 0.79 & 0.80 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 4 modelos: SVM Linear, Regressão Logística, SGD, MLP(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA (4 modelos): SVM Linear, Regressão Logística, SGD, MLP(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.88 & 0.91 & 0.90 & 0.91 & 0.88 & 0.89 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
+5 modelos 
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 5 modelos: Regressão Logística, SVM Linear, SGD, Naive Bayes, MLP(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.80 & 0.80 & 0.80 & 0.83 & 0.82 & 0.82 \\
+		Stacking & 0.80 & 0.81 & 0.80 & 0.83 & 0.82 & 0.83 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 5 modelos: SVM Linear, SGD, Regressão Logística, LightGBM, Naive Bayes(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.80 & 0.79 & 0.82 & 0.82 & 0.82 \\
+		Stacking & 0.79 & 0.81 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 5 modelos: Linear SVM, Regressão Logística, SGD, MLP, LightGBM(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.89 & 0.90 & 0.89 & 0.90 & 0.90 \\
+		Stacking & 0.90 & 0.89 & 0.90 & 0.89 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SA 5 modelos: SVM Linear, Regressão Logística, SGD, MLP, LightGBM(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{SELEÇÃO POR ACURÁCIA E DIVERSIDADE}
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
+2 modelos sad
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 2 modelos: RandomForest, KNN (Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.56 & 0.91 & 0.69 & 0.82 & 0.37 & 0.51 \\
+		Stacking & 0.75 & 0.79 & 0.77 & 0.80 & 0.77 & 0.79 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 2 modelos: Random Forest e KNN (Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.57 & 0.88 & 0.69 & 0.79 & 0.42 & 0.55 \\
+		Stacking & 0.75 & 0.77 & 0.76 & 0.79 & 0.77 & 0.78 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 2 modelos: KNN e MLP(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.74 & 0.93 & 0.82 & 0.91 & 0.67 & 0.77 \\
+		Stacking & 0.87 & 0.88 & 0.87 & 0.87 & 0.87 & 0.87 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD (2 modelos): MLP e LightGBM(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.84 & 0.93 & 0.89 & 0.93 & 0.83 & 0.87 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
+3 modelos sad
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 3 modelos: MLP, RandomForest, KNN(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.76 & 0.81 & 0.79 & 0.82 & 0.78 & 0.80 \\
+		Stacking & 0.78 & 0.82 & 0.80 & 0.83 & 0.80 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 3 modelos: KNN, Random Forest, AdaBoost(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.76 & 0.76 & 0.76 & 0.79 & 0.79 & 0.79 \\
+		Stacking & 0.75 & 0.77 & 0.76 & 0.79 & 0.77 & 0.78 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 3 modelos: MLP, Random Forest, KNN(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.88 & 0.85 & 0.86 & 0.86 & 0.88 & 0.87 \\
+		Stacking & 0.89 & 0.88 & 0.89 & 0.88 & 0.89 & 0.89 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 3 modelos: LightGBM, RandomForest, MLP(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.87 & 0.89 & 0.88 & 0.90 & 0.89 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
+4 modelos sad
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 4 modelos: Regressão Logística, RandomForest, LightGBM, MLP(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.77 & 0.84 & 0.80 & 0.85 & 0.78 & 0.81 \\
+		Stacking & 0.80 & 0.81 & 0.80 & 0.83 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 4 modelos: KNN, Naive Bayes, AdaBoost, Decision Tree(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.73 & 0.82 & 0.77 & 0.82 & 0.73 & 0.78 \\
+		Stacking & 0.79 & 0.77 & 0.78 & 0.80 & 0.82 & 0.81 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 4 modelos: MLP, Linear SVM, Naive Bayes, Regressão Logística(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.89 & 0.90 & 0.90 & 0.90 & 0.88 & 0.89 \\
+		Stacking & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 4 modelos: Regressão Logística, KNN, AdaBoost, RandomForest(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.88 & 0.90 & 0.89 & 0.90 & 0.87 & 0.89 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+\subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
+5 modelos sad
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 5 modelos: Regressão Logística, RandomForest, LightGBM, MLP, KNN(Letterboxd - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.79 & 0.81 & 0.80 & 0.83 & 0.81 & 0.82 \\
+		Stacking & 0.80 & 0.81 & 0.81 & 0.83 & 0.82 & 0.83 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas Consolidadas para Ensembles SAD 5 modelos: KNN, Naive Bayes, AdaBoost, Decision Tree, LightGBM(Letterboxd - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.78 & 0.77 & 0.78 & 0.80 & 0.81 & 0.80 \\
+		Stacking & 0.80 & 0.79 & 0.79 & 0.81 & 0.82 & 0.82 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 5 modelos: MLP, Linear SVM, Naive Bayes, Regressão Logística, KNN(IMDb - Sem Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.90 & 0.89 & 0.90 & 0.89 & 0.90 & 0.90 \\
+		Stacking & 0.89 & 0.90 & 0.90 & 0.90 & 0.89 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Métricas para Ensembles SAD 5 modelos: Regressão Logística, KNN, AdaBoost, RandomForest, MLP(IMDb - Com Pré-Processamento)}
+	\begin{tabular}{lcccccc}
+		\toprule
+		\multirow{2}{*}{\textbf{Modelo}} & \multicolumn{3}{c}{\textbf{Classe Negativa}} & \multicolumn{3}{c}{\textbf{Classe Positiva}} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
+		\midrule
+		Voting & 0.91 & 0.88 & 0.90 & 0.89 & 0.91 & 0.90 \\
+		Stacking & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 & 0.90 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+Diante dos resultados obtido 
+
+\section{Questões de Pesquisa}
+
+Diante da análise realiza, há informações necessárias para responder as questões de pesquisa enunciadas no capítulo inicial. Portanto, a seguir será respondido cada uma delas, utilizando as conclusões obtidas nesse capítulo.
+
+\begin{description}
+    \item[QP01] Qual dos dois compiladores estudados emite um binário com tamanho menor?
+
+    Independente do tamanho da entrada, na média o Cheerp apresentou um binário 10\% menor que o binário emitido pelo Emscripten. Ademais, a variação desse percentual foi muito pequena, logo, em todos os algoritmos utilizados esse resultado se mostrou verdadeiro.
+
+    \item[QP02] Entre os dois, qual produz um binário que utiliza menos memória, considerando o tamanho inicial da memória igual para ambos?
+\end{description}
+

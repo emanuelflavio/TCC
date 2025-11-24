@@ -1,0 +1,47 @@
+% ----------------------------------------------------------
+\chapter{Introdução}\label{cap1}
+% ----------------------------------------------------------
+
+Nos dias atuais, com o avanço acelerado da internet e da comunicação digital, tornou-se fácil para qualquer pessoa expor suas opiniões online. Esse fenômeno tem tido um impacto significativo nas comunidades virtuais e até mesmo fora delas, influenciando comportamentos, decisões de consumo e debates sociais \cite{almeida2023exploring}. 
+
+Grande parte dessa facilidade e alcance deve-se à popularização das redes sociais, que transformaram a forma como os indivíduos se expressam e compartilham experiências. Essas plataformas não apenas conectam pessoas, mas também se tornaram fontes abundantes de dados textuais gerados pelos próprios usuários, os quais podem ser utilizados em diversas análises \cite{paes2022analise}.
+
+Um dos principais usos desses dados textuais é a análise de sentimentos, uma técnica voltada à identificação, extração e classificação de emoções expressas em textos, como opiniões sobre produtos, serviços, marcas ou tópicos variados. Essa tarefa tem se mostrado extremamente útil para empresas interessadas em compreender a percepção dos consumidores, para organizações que desejam medir o impacto de campanhas públicas e para pesquisadores que analisam fenômenos sociais em larga escala \cite{mohammed2023comprehensive}.
+
+A análise de sentimentos utiliza amplamente técnicas de Processamento de Linguagem Natural (PLN), um subcampo da inteligência artificial que busca permitir que computadores compreendam, interpretem e gerem a linguagem humana de forma significativa \cite{dang2020analise}. O PLN abrange uma ampla gama de tarefas computacionais, como tradução automática, sumarização de textos, reconhecimento de entidades nomeadas, classificação de textos e, especialmente, análise de sentimentos. Por meio de modelos estatísticos, redes neurais e algoritmos de aprendizado de máquina, o PLN procura extrair padrões linguísticos que possibilitem o processamento e a interpretação automatizada e inteligente de informações em linguagem natural \cite{paes2022analise}.
+
+Outro conceito essencial nesse contexto é o de ensemble learning, uma abordagem de aprendizado de máquina que consiste na combinação de diversos modelos fracos ou de base para formar um modelo mais robusto, preciso e generalizável \cite{dong2020survey}. O ensemble é particularmente eficiente na redução de erros de viés e variância e, em muitos casos, supera o desempenho de modelos isolados. Essa técnica pode ser implementada de diversas formas, como bagging, boosting e stacking \cite{kazmaier2022power}. Além disso, os ensembles podem ser divididos em dois grandes grupos: homogêneos, que utilizam modelos da mesma natureza, e heterogêneos, que combinam modelos de diferentes tipos, beneficiando-se da diversidade das decisões \cite{avelino2022abordagem}.
+
+A plataforma Letterboxd surge como uma rica fonte de dados para esse tipo de análise. Voltada para entusiastas do cinema, essa rede social permite que seus usuários registrem os filmes assistidos, atribuam notas, escrevam resenhas, criem listas temáticas e interajam com outras pessoas que compartilham os mesmos interesses \cite{andrade2022estetica}. Assim, o Letterboxd funciona não apenas como uma comunidade engajada, mas também como um repositório valioso de opiniões e sentimentos sobre filmes. Esse ambiente propício à expressão de sentimentos torna a plataforma uma base ideal para estudos de análise de sentimentos, possibilitando a classificação automatizada das resenhas como positivas, negativas ou neutras \cite{britto2019analise}, oferecendo insights relevantes sobre a recepção crítica de filmes entre o público.
+
+Diante desse cenário, o presente trabalho tem como objetivo analisar a eficácia de diferentes estratégias de pré-processamento textual na análise de sentimentos aplicada a comentários de filmes, utilizando algoritmos clássicos de classificação supervisionada e técnicas de ensemble learning. Para isso, foi construída uma base de dados a partir do Letterboxd, contendo inicialmente cerca de 150 mil comentários acompanhados de suas respectivas classificações em estrelas, variando de 0,5 a 5. A base inclui resenhas em diversos idiomas, com predominância do inglês, o que também impõe desafios linguísticos e computacionais ao processo de análise. Este estudo busca avaliar o impacto do pré-processamento na performance dos modelos, contribuindo para o avanço das aplicações de PLN em contextos reais e heterogêneos.
+
+\section{Objetivos}
+
+Os objetivos deste trabalho são subdivididos em objetivos gerais e objetivos específicos. Estes são:
+
+\subsection{Objetivo Geral}
+
+Analisar e comparar o desempenho de técnicas de ensemble de classificadores heterogêneas aplicadas à tarefa de análise de sentimentos.
+
+
+\subsection{Objetivos Específicos}
+
+Os objetivos específicos são:
+
+\begin{itemize}
+    \item Revisar a literatura sobre análise de sentimentos e métodos de ensemble, destacando os conceitos e características dos métodos heterogêneos.
+    \item Selecionar e preparar os conjuntos de dados utilizados no experimento, incluindo a construção de uma nova base a partir de comentários de filmes extraídos do Letterboxd.
+    \item Implementar e treinar modelos de ensemble  heterogêneos, com base no desempenho e diversidade dos algoritmos clássicos.
+    \item Avaliar desempenho dos modelos, a partir de métricas de classificação como acurácia, precisão, revocação e F1-score, nos diferentes conjuntos de dados.
+    \item Comparar os resultados obtidos entre os diferentes modelos construídos, discutindo suas vantagens, limitações e aplicabilidade à análise de sentimentos.
+\end{itemize}
+
+\section{Justificativa}
+
+A execução deste trabalho torna-se justificável devido a baixa quantidade de pesquisas que realizam comparação entre as ferramentas, Emscripten e Cheerp. Há também textos de \textit{blogs} que realizam essa comparação, no entanto, o rigor cientifico não é muito presente nos mesmos, como será visto na seção de Trabalhos Correlatos, \ref{correlatos}.
+
+\section{Organização do Trabalho}
+
+Esse trabalho é organizado como segue: No capítulo \ref{fundamentacao} é apresentado os conceitos base para melhor entendimento das tecnologias abordadas. Portanto, o capítulo apresenta uma introdução sobre a plataforma WebAssembly, seguida por duas seções informativas sobre os dois compiladores utilizados. Ao final do capítulo é também listado as principais pesquisas relacionadas. No capítulo seguinte, \ref{delineamento}, é descrito os passos necessários para realizar o experimento desejado assim como o ambiente adotado para execução da pesquisa. No capítulo \ref{resultados} é apresentado os dados coletados no experimento executado, em seguida é feito uma análise dos dados visando responder as questões de pesquisa. Por fim, no capítulo \ref{conclusoes} é sintetizado o que foi realizado na pesquisa assim como os resultados obtidos ao final da análise de dados.
+
