@@ -2,9 +2,17 @@
 \chapter{Conclusões}\label{conclusoes}
 % ----------------------------------------------------------
 
-Nessa monografia foi realizado uma comparação entre dois compiladores para a plataforma WebAssembly, são os compiladores Cheerp e Emscripten. A pesquisa teve objetivo de comparar a performance das duas ferramentas através de uma análise do tamanho do binário emitido pelos compiladores, do uso de memória e tempo de execução.
+Este trabalho investigou o uso de técnicas de \textit{Processamento de Linguagem Natural} aplicadas à \textit{análise de sentimentos} em comentários de filmes, com ênfase na avaliação dos modelos individuais e dos \textit{ensembles} construídos por meio da \textit{Seleção por Acurácia} (\textit{SA}) e \textit{Seleção por Acurácia e Diversidade} (\textit{SAD}). A pesquisa concentrou-se na comparação entre diferentes abordagens de \textit{ensembles}, por meio de técnicas como \textit{Voting} e \textit{Stacking}, com o intuito de compreender como a junção de vários modelos pode melhorar o desempenho dos classificadores.
 
 
-\section{Trabalhos futuros}
+Os resultados deste projeto contribuem em alguns pontos, mostrando a eficácia dos \textit{ensembles} heterogêneos em tarefas de análise de sentimentos e fortalecendo a importância da aplicação da \textit{diversidade} entre \textit{ensembles}, já que os desempenhos obtidos foram satisfatórios. Tanto o \textit{Voting} quanto o \textit{Stacking} tiveram ganhos relevantes, com o segundo sendo capaz de obter um desempenho superior. Isso demonstra que a diversidade contribui positivamente para a robustez e a generalização dos \textit{ensembles}.
 
-Tem um monte de coisa para fazer ainda, mas eu quero é meu canudo.
+
+Ainda sobre os resultados, foi mostrado que cada abordagem se destaca por um aspecto diferente: o \textit{ensemble} com todos os modelos se revelou o mais \textit{robusto}; os \textit{ensembles SA} foram os mais \textit{eficientes} e frequentemente os mais precisos, graças ao subconjunto de modelos de alto desempenho; e os \textit{SAD}, principalmente o \textit{Stacking}, foram os que melhor aproveitaram a diversidade para recuperar erros e lidar com conjuntos mais heterogêneos. Na base \textit{IMDb}, pôde-se perceber que o tipo de \textit{ensemble} ou o pré-processamento tinham pouco impacto, enquanto na \textit{Letterboxd} a escolha da estratégia era mais perceptível. Portanto, foi definido que \textit{ensembles} pequenos e fortes, como o caso do \textit{SA} com 3 modelos, já eram bastante estáveis, enquanto os \textit{ensembles SAD} ganham mais relevância quando a base é mais ruidosa.
+
+
+Os objetivos que foram propostos no início do trabalho foram alcançados: foi realizada a revisão da literatura sobre análise de sentimentos e métodos de \textit{ensemble}; foram preparados os conjuntos de dados, com a inclusão de uma nova base; foram construídos, analisados e comparados tipos de \textit{ensembles} com base nos desempenhos dos algoritmos clássicos; foi verificado o impacto do pré-processamento; foram comparados os resultados dos diferentes modelos construídos; e foi demonstrado de forma quantitativa e fundamentada que a \textit{Seleção por Acurácia} e a \textit{Seleção por Acurácia e Diversidade} são estratégias eficientes para melhorar o desempenho em tarefas de análise de sentimentos.
+
+
+Para finalizar, como trabalhos futuros, pode-se explorar: Outros modelos de seleção para \textit{ensembles}, visto que neste trabalho apenas duas técnicas foram analisadas. A realização do experimento com mais modelos, incluindo modelos de \textit{Deep Learning}, para que haja uma seleção mais ampla e maior diversidade. O aumento do número de modelos no \textit{ensemble}, visando testar os métodos \textit{SA} e \textit{SAD} com mais de 5 componentes. A análise de outras técnicas de pré-processamento, visando um melhor entendimento e otimização para o modelo. O uso de outros métodos de \textit{ensembles}, além do \textit{Voting} e \textit{Stacking} utilizados neste estudo.
+

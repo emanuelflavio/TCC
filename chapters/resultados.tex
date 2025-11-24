@@ -204,10 +204,11 @@ Na base \textit{IMDb sem pré-processamento}, os ensembles atingiram ótimos res
 
 Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados foram bem parecidos com os do cenário sem pré-processamento, porém houve um leve ganho tanto no Voting quanto no Stacking. Com isso, confirma-se que o desempenho na base IMDb \textit{não é fortemente influenciado pelo pré-processamento}, e ensembles de grande porte podem ser \textit{robustos} mesmo com variações no tratamento do texto.
 
-\section{SELEÇÃO POR ACURÁCIA}
+Os resultados mostraram que \textit{ensembles} com 10 modelos apresentam um desempenho bastante sólido em diversos cenários. Quando há ruído, o \textit{stacking} tende a ser superior ao \textit{voting}, enquanto o \textit{voting} já tem um bom desempenho quando os modelos base são mais consistentes.
 
+\section{SELEÇÃO POR ACURÁCIA}
+Nesta seção, serão mostrados os resultados dos \textit{ensembles} construídos por meio da seleção por acurácia (\textit{SA}), onde somente os modelos individuais com o maior desempenho são escolhidos para a composição do \textit{ensemble}. Aqui, os \textit{ensembles} serão formados por subconjuntos contendo 2, 3, 4 ou 5 modelos. Essa estratégia busca avaliar \textit{ensembles} de diferentes tamanhos.
 \subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
-2 modelos
 
 \begin{table}[H]
 	\centering
@@ -271,9 +272,9 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
+Nos \textit{ensembles} com 2 modelos, pode-se observar que a combinação foi feita pelos modelos lineares mais fortes, sendo \textit{Regressão Logística}, \textit{SVM Linear} e \textit{SGD}, que apresentaram desempenhos sólidos, tanto no \textit{voting} quanto no \textit{stacking}. No \textit{dataset} do \textit{Letterboxd}, os F1-Scores ficaram entre \textit{0.79} e \textit{0.82}, e na base do \textit{IMDb}, foram alcançados \textit{0.90}. Com este resultado, demonstra-se que, para tarefas de análise de sentimento, um \textit{ensemble} formado por apenas dois modelos fortes pode produzir um desempenho favorável.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
-3 modelos 
 
 \begin{table}[H]
 	\centering
@@ -335,10 +336,10 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
-
+Nos \textit{ensembles} formados por 3 modelos, com a adição de mais um modelo, que ainda foi um modelo linear, tanto o \textit{voting} quanto o \textit{stacking} mantiveram o desempenho do \textit{ensemble} com dois modelos. Isso mostra que, quando os classificadores são muito parecidos em comportamento e estrutura, os ganhos são limitados.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
-4 modelos 
+
 
 \begin{table}[H]
 	\centering
@@ -402,10 +403,9 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
-
+Com a inclusão de um quarto modelo, puderam ser notados pequenos ganhos de diversidade, principalmente nas bases do \textit{Letterboxd}. A presença de um método diferente (\textit{Naive Bayes} ou \textit{LightGBM}) contribuiu para uma leve melhoria no equilíbrio entre precisão e \textit{recall} em algumas classes; contudo, esses ganhos foram discretos e não superaram de maneira expressiva os \textit{ensembles} com 3 modelos.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
-5 modelos 
 
 
 \begin{table}[H]
@@ -470,10 +470,16 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
+Por fim, nos \textit{ensembles} com 5 modelos, com a adição de outro modelo de natureza diferente (\textit{MLP} e \textit{Naive Bayes}), foi observado um comportamento mais consistente na base do \textit{Letterboxd} e estabilidade completa nas bases do \textit{IMDb}. O \textit{voting} e o \textit{stacking} produziram resultados praticamente equivalentes, com F1-Scores variando entre \textit{0.80} e \textit{0.83} no \textit{Letterboxd} e atingindo \textit{0.90} no \textit{IMDb}. Esses resultados demonstram que a adição de diversidade ao conjunto, mesmo que de maneira moderada, pode trazer equilíbrio às métricas de avaliação, mas não resultará em um grande ganho, visto que \textit{ensembles} menores já continham modelos muito consistentes e dominantes.
+
+No geral, a técnica de \textit{SA} confirma que \textit{ensembles} pequenos, formados por modelos com alta acurácia, já são capazes de apresentar um desempenho favorável e comparável aos \textit{ensembles} maiores. No entanto, o ganho principal está no tempo de treinamento, pois \textit{ensembles} com menos modelos treinam mais rapidamente e mantêm métricas competitivas. Os resultados reforçam a força dos modelos lineares na análise de sentimento.
+
 \section{SELEÇÃO POR ACURÁCIA E DIVERSIDADE}
 
+Na abordagem \textit{SAD} (Seleção por Acurácia e Diversidade), temos a combinação de dois critérios: o desempenho individual dos modelos e o grau de diversidade entre as suas previsões. Essa técnica de seleção tem como objetivo escolher subconjuntos de classificadores que sejam tanto \textit{competentes quanto diversos}. Modelos com maior diversidade podem reduzir a variância e os vieses por oferecerem perspectivas diferentes sobre os dados, já que seu funcionamento é distinto. Logo, nesta seção, serão discutidos e apresentados os resultados dos \textit{ensembles} formados por 2, 3, 4 e 5 modelos selecionados pelo método \textit{SAD}.
+
+
 \subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
-2 modelos sad
 
 \begin{table}[H]
 	\centering
@@ -537,8 +543,11 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 \end{table}
 
 
+Nos \textit{ensembles} com 2 modelos, pode-se observar como o método \textit{SAD} já performa, selecionando modelos estruturalmente diferentes, como o \textit{Random Forest} e \textit{KNN} na base \textit{Letterboxd} ou \textit{MLP} e \textit{LightGBM} na base \textit{IMDb}. Essa seleção demonstra o papel da \textit{diversidade}: mesmo quando o desempenho individual de alguns desses modelos não está entre os melhores, a combinação pode gerar \textit{ensembles} mais equilibrados. No entanto, os ganhos não ocorrem em todos os casos. Na base \textit{Letterboxd}, especialmente na versão com pré-processamento, o \textit{Voting} apresentou um forte desequilíbrio entre as classes, enquanto o \textit{Stacking}, por ser mais robusto funcionando com um meta-aprendiz, exibiu resultados superiores e muito mais estáveis, alcançando F1-Scores próximos de \textit{0.79} e \textit{0.77} para as duas versões da base. Na base \textit{IMDb}, o impacto da diversidade foi mais consistente: pares como \textit{MLP–KNN} ou \textit{MLP–LightGBM} produziram \textit{ensembles} com F1-Scores entre \textit{0.87} e \textit{0.90}, destacando o potencial da técnica em bases mais robustas.
+
+
 \subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
-3 modelos sad
+
 
 \begin{table}[H]
 	\centering
@@ -601,8 +610,9 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
+Adicionando mais um modelo, pôde-se perceber um comportamento mais sólido nos \textit{ensembles}, tanto no \textit{Voting} quanto no \textit{Stacking}. A inclusão de um terceiro classificador aumentou a capacidade de equilíbrio entre a precisão e o \textit{recall}, principalmente na base do \textit{Letterboxd}. No cenário pré-processado, o \textit{ensemble} formado por \textit{MLP}, \textit{Random Forest} e \textit{KNN} apresentou F1-Scores entre \textit{0.79} e \textit{0.82}, enquanto na versão sem pré-processamento os resultados permaneceram próximos, mas com menos estabilidade. Na base \textit{IMDb}, os modelos escolhidos pelo \textit{SAD} (\textit{MLP}, \textit{Random Forest} e \textit{KNN}, ou \textit{LightGBM}, \textit{MLP} e \textit{Random Forest}) alcançaram um desempenho consistentemente alto, chegando a F1-Scores de \textit{0.89} para \textit{voting} e \textit{0.90} para \textit{stacking}. Isso mostra que, ao contrário da seleção apenas por acurácia, a seleção por acurácia e diversidade tende a produzir benefícios quando combina modelos de naturezas distintas.
+
 \subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
-4 modelos sad
 
 
 \begin{table}[H]
@@ -667,11 +677,10 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 \end{table}
 
 
-
+Nos \textit{ensembles} compostos por 4 modelos, a técnica \textit{SAD} demonstrou maior capacidade de explorar diversidade, montando um classificador que combinava diversos tipos de classificadores, como modelos lineares, modelos baseados em árvores, redes neurais e algoritmos \textit{instance-based}. Os resultados da base de dados \textit{Letterboxd} indicaram um aumento na estabilidade, com F1-Scores entre \textit{0.80} e \textit{0.82} para \textit{voting} e \textit{stacking}. Na versão sem pré-processamento, o conjunto mais diverso, incluindo \textit{KNN}, \textit{Naive Bayes}, \textit{AdaBoost} e \textit{Decision Tree}, mostrou que essa heterogeneidade pode compensar fraquezas individuais. Já no \textit{IMDb}, tanto com como sem pré-processamento, os resultados permaneceram elevados, com F1-Scores entre \textit{0.89} e \textit{0.90}, com o \textit{Stacking} atingindo \textit{0.90} em todos os cenários. Isso reforça que \textit{ensembles} moderadamente grandes e diversificados conseguem capturar diferentes aspectos dos dados sem reduzir a consistência geral.
 
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
-5 modelos sad
 
 
 \begin{table}[H]
@@ -749,20 +758,14 @@ Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados f
 	\end{tabular}
 \end{table}
 
+Com 5 modelos formando o \textit{ensemble}, estes foram os que mais demonstraram estabilidade dentro da abordagem \textit{SAD}. Na base do \textit{Letterboxd}, tanto com pré-processamento quanto sem, o \textit{voting} e o \textit{stacking} alcançaram F1-Scores entre \textit{0.79} e \textit{0.83}, mostrando ganhos de robustez conforme mais modelos diversos eram incluídos. Na base do \textit{IMDb}, os \textit{ensembles} apresentaram excelentes desempenhos, com F1-Scores de aproximadamente \textit{0.90} em todos os cenários, tanto no \textit{voting} quanto no \textit{stacking}. Com isso, pode-se notar que \textit{ensembles} compostos por combinações de modelos lineares, redes neurais e modelos de árvores, como o conjunto \textit{Regressão Logística}, \textit{KNN}, \textit{AdaBoost}, \textit{Random Forest} e \textit{MLP}, demonstraram ser equilibrados entre os valores de precisão e \textit{recall} nas duas classes.
+
+Os resultados do \textit{SAD} mostram que a combinação entre acurácia e diversidade permite selecionar subconjuntos de modelos que são capazes de alcançar desempenho elevado mesmo com a inclusão de classificadores com desempenho individual inferior. A técnica se mostrou eficaz quando os \textit{ensembles} eram formados por 3 ou mais modelos e teve um melhor desempenho quando aplicada à base de dados do \textit{IMDb}. Com isso, podemos concluir que a diversidade desempenha um papel importante e fundamental para melhorar a estabilidade, compensar vieses e aumentar a robustez no contexto da análise de sentimentos.
+
+A comparação entre os três tipos de seleção e as técnicas de \textit{ensemble} mostram diferenças importantes na forma como cada estratégia reage às características das bases de dados e das técnicas de pré-processamento. Os \textit{ensembles} sem seleção, formados por todos os 10 modelos, apresentaram um \textit{desempenho sólido} em todos os cenários. A grande \textit{diversidade estrutural} tornou esse \textit{ensemble} bastante robusto, o que resultou em métricas estáveis, principalmente na base do \textit{IMDb}, onde os F1-Scores ficaram em torno de \textit{0.90}. Entretanto, para o \textit{Voting}, a inclusão de tantos modelos fracos não foi benéfica, resultando em um aumento do custo computacional e do tempo de treinamento.
 
 
+A seleção por acurácia (\textit{SA}) mostrou um comportamento que já era esperado e eficiente, pois priorizou os modelos de melhor desempenho individual, principalmente os \textit{modelos lineares}, como \textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}. Nesse cenário, os \textit{ensembles} tornaram-se eficazes com poucos modelos em sua composição (a partir de 3), o que os torna mais rápidos no treinamento que os \textit{ensembles} maiores. Os \textit{ensembles} com 3 modelos já produziam resultados idênticos aos modelos com 4 e 5. Esses \textit{ensembles} pequenos, dominados por modelos lineares, especialmente na base de dados \textit{IMDb}, dominaram o problema de classificação.
 
-Diante dos resultados obtido 
-
-\section{Questões de Pesquisa}
-
-Diante da análise realiza, há informações necessárias para responder as questões de pesquisa enunciadas no capítulo inicial. Portanto, a seguir será respondido cada uma delas, utilizando as conclusões obtidas nesse capítulo.
-
-\begin{description}
-    \item[QP01] Qual dos dois compiladores estudados emite um binário com tamanho menor?
-
-    Independente do tamanho da entrada, na média o Cheerp apresentou um binário 10\% menor que o binário emitido pelo Emscripten. Ademais, a variação desse percentual foi muito pequena, logo, em todos os algoritmos utilizados esse resultado se mostrou verdadeiro.
-
-    \item[QP02] Entre os dois, qual produz um binário que utiliza menos memória, considerando o tamanho inicial da memória igual para ambos?
-\end{description}
+Já na seleção por acurácia e diversidade (\textit{SAD}), os resultados tiveram padrões distintos. Modelos com desempenho mais modestos passaram a compor o \textit{ensemble}, aumentando a diversidade e complementando as previsões. Contudo, isso resultou em um \textit{Voting} menos estável, especialmente na base de dados do \textit{Letterboxd}, onde diferenças muito grandes entre os classificadores geraram decisões conflitantes. No entanto, com o \textit{Stacking}, essa diversidade foi uma vantagem que superou o \textit{Voting} em praticamente todos os cenários e aproximou-se dos melhores resultados obtidos pela \textit{SA}. Em bases com mais ruído, como a do \textit{Letterboxd}, a diversidade contribuiu para o equilíbrio entre precisão e \textit{recall}.
 
