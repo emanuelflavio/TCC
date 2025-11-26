@@ -129,6 +129,9 @@ Já os modelos baseados em árvores (\textit{Random Forest}, \textit{LightGBM} e
 Tais achados reforçam o que é estabelecido na literatura: \textit{modelos lineares são frequentemente superiores} quando se trata de classificação textual com TF-IDF. Além disso, a análise evidenciou o \textit{impacto variável do pré-processamento} em diferentes bases, podendo prejudicar, melhorar ou não ter efeito, dependendo da base.
 
 
+porem
+
+
 
 \section{DESEMPENHO DOS ENSEMBLES SEM SELEÇÃO}
 
@@ -208,6 +211,101 @@ Os resultados mostraram que \textit{ensembles} com 10 modelos apresentam um dese
 
 \section{SELEÇÃO POR ACURÁCIA}
 Nesta seção, serão mostrados os resultados dos \textit{ensembles} construídos por meio da seleção por acurácia (\textit{SA}), onde somente os modelos individuais com o maior desempenho são escolhidos para a composição do \textit{ensemble}. Aqui, os \textit{ensembles} serão formados por subconjuntos contendo 2, 3, 4 ou 5 modelos. Essa estratégia busca avaliar \textit{ensembles} de diferentes tamanhos.
+
+As tabelas a seguir mostram os valores das acuracias de cada modelo que foram usadas como base para a formação dos ensembles:
+\begin{table}[H]
+	\centering
+	\caption{Acurácia dos Modelos Individuais (LETTER - Sem Pré-Processamento)}
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Modelo} & \textbf{Acurácia} \\
+		\midrule
+		Naive Bayes & 0.7950 \\
+		Regressão Logística & 0.8076 \\
+		SVM Linear & 0.8101 \\
+		Random Forest & 0.7577 \\
+		K-Nearest Neighbors & 0.5971 \\
+		Multi-Layer Perceptron & 0.7882 \\
+		Decision Tree & 0.6497 \\
+		LightGBM & 0.7967 \\
+		AdaBoost & 0.7744 \\
+		SGD & 0.8078 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Acurácia dos Modelos Individuais (LETTER - Com Pré-Processamento)}
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Modelo} & \textbf{Acurácia} \\
+		\midrule
+		Naive Bayes & 0.7981 \\
+		Regressão Logística & 0.8118 \\
+		SVM Linear & 0.8107 \\
+		Random Forest & 0.7645 \\
+		K-Nearest Neighbors & 0.5833 \\
+		Multi-Layer Perceptron & 0.7972 \\
+		Decision Tree & 0.6583 \\
+		LightGBM & 0.7916 \\
+		AdaBoost & 0.7769 \\
+		SGD & 0.8099 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Acurácia dos Modelos Individuais (IMDB - Sem Pré-Processamento)}
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Modelo} & \textbf{Acurácia} \\
+		\midrule
+		Naive Bayes & 0.8584 \\
+		Regressão Logística & 0.8924 \\
+		SVM Linear & 0.8930 \\
+		Random Forest & 0.8426 \\
+		K-Nearest Neighbors & 0.7226 \\
+		Multi-Layer Perceptron & 0.8694 \\
+		Decision Tree & 0.7330 \\
+		LightGBM & 0.8634 \\
+		AdaBoost & 0.8616 \\
+		SGD & 0.8894 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Acurácia dos Modelos Individuais (IMDB - Com Pré-Processamento)}
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Modelo} & \textbf{Acurácia} \\
+		\midrule
+		Naive Bayes & 0.8538 \\
+		Regressão Logística & 0.8902 \\
+		SVM Linear & 0.8930 \\
+		Random Forest & 0.8466 \\
+		K-Nearest Neighbors & 0.7286 \\
+		Multi-Layer Perceptron & 0.8784 \\
+		Decision Tree & 0.7274 \\
+		LightGBM & 0.8658 \\
+		AdaBoost & 0.8510 \\
+		SGD & 0.8816 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+ 
+
 \subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
 
 \begin{table}[H]
