@@ -12,7 +12,13 @@ Duas bases de dados compostas por comentários de filmes foram utilizadas neste 
 
 A primeira base de dados foi composta por comentários e notas de usuários da plataforma Letterboxd. Inicialmente, foram coletados 150.000 comentários por meio de um crawler desenvolvido em Python, utilizando a biblioteca Selenium. A extração foi realizada a partir das avaliações de 50 filmes diversos disponíveis na plataforma.
 
-Os comentários estavam em vários idiomas, sendo a maioria em inglês. Para garantir a uniformidade linguística da base, foram utilizados apenas os comentários em inglês. Para isso, os dados foram separados em duas bases uma com comentários em inglês e outra com os demais idiomas utilizando a biblioteca langdetect, também em Python. Cada comentário vinha acompanhado de uma nota atribuída pelo usuário, variando de 0.5 a 5 estrelas. Comentários sem nota receberam, inicialmente, o valor 0 durante a extração, mas foram posteriormente removidos.
+Os comentários estavam em vários idiomas, sendo a maioria em inglês. Para garantir a uniformidade linguística da base, foram utilizados apenas os comentários em inglês. Para isso, os dados foram separados em duas bases uma com comentários em inglês e outra com os demais idiomas utilizando a biblioteca langdetect, também em Python. Cada comentário vinha acompanhado de uma nota atribuída pelo usuário, variando de 0.5 a 5 estrelas. Comentários sem nota receberam, inicialmente, o valor 0 durante a extração, mas foram posteriormente removidos. 
+
+Durante a definição das classes, observou-se que a nota 3 não se comportava adequadamente como classe neutra, ainda que, inicialmente, este estudo tivesse sido planejado para trabalhar com três classes, e não duas, como acabou sendo conduzido. Embora na literatura a nota intermediária seja frequentemente interpretada como indicativa de neutralidade\cite{aftab2023comprehensive, ojeda2024utilizando, silva2023analise}. As análises exploratórias realizadas neste trabalho demonstraram que essa suposição introduzia inconsistências e prejudicava o desempenho dos classificadores.
+
+Diante desse cenário, foram conduzidos experimentos adicionais com técnicas de agrupamento e inspeção estrutural dos dados. Os resultados revelaram que a nota 3 não constituía uma classe intermediária coerente, apresentando grande heterogeneidade interna. Verificou-se, ainda, que a maior parte dos comentários originalmente rotulados como neutros apresentava maior afinidade linguística e semântica com a classe positiva.
+
+Com base nessas evidências, optou-se por agrupar a nota 3 junto à classe positiva. Essa decisão reduziu a ambiguidade da rotulagem, melhorou a separação entre as classes e contribuiu para classificadores mais estáveis e com melhor desempenho.
 
 Após os tratamentos descritos, a base final contou com 114.817 comentários em inglês. A rotulação dos sentimentos foi feita com base nas notas atribuídas pelos usuários, utilizando o seguinte critério:
 

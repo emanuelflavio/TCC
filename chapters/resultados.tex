@@ -21,16 +21,16 @@ As tabelas a seguir detalham os resultados obtidos para cada cenário, apresenta
 			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
 			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
 			\midrule
-			K-Nearest Neighbors & 0.54 & 0.75 & 0.63 & 0.67 & 0.43 & 0.52 \\
-			Naive Bayes & 0.79 & 0.78 & 0.78 & 0.81 & 0.82 & 0.81 \\
-			Regressão Logística & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
+			KNN & 0.54 & 0.75 & 0.63 & 0.67 & 0.43 & 0.52 \\
+			NB & 0.79 & 0.78 & 0.78 & 0.81 & 0.82 & 0.81 \\
+			RL & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
 			SGD & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
-			SVM Linear & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
-			Random Forest & 0.78 & 0.69 & 0.73 & 0.75 & 0.83 & 0.79 \\
+			SVM & 0.80 & 0.79 & 0.80 & 0.82 & 0.83 & 0.82 \\
+			RF & 0.78 & 0.69 & 0.73 & 0.75 & 0.83 & 0.79 \\
 			LightGBM & 0.77 & 0.80 & 0.78 & 0.81 & 0.79 & 0.80 \\
 			AdaBoost & 0.74 & 0.81 & 0.77 & 0.81 & 0.75 & 0.78 \\
-			Multi-Layer Perceptron & 0.77 & 0.81 & 0.79 & 0.82 & 0.79 & 0.80 \\
-			Decision Tree & 0.60 & 0.84 & 0.70 & 0.78 & 0.49 & 0.61 \\
+			MLP & 0.77 & 0.81 & 0.79 & 0.82 & 0.79 & 0.80 \\
+			DT & 0.60 & 0.84 & 0.70 & 0.78 & 0.49 & 0.61 \\
 			\bottomrule
 		\end{tabular}%
 	}
@@ -48,13 +48,13 @@ No cenário da base Letterboxd com pré-processamento, pode-se observar que os \
 			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
 			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
 			\midrule
-			Naive Bayes & 0.79 & 0.77 & 0.78 & 0.80 & 0.82 & 0.81 \\
-			Regressão Logística & 0.80 & 0.79 & 0.79 & 0.82 & 0.82 & 0.82 \\
-			SVM Linear & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
-			Random Forest & 0.79 & 0.66 & 0.72 & 0.74 & 0.84 & 0.79 \\
-			K-Nearest Neighbors & 0.56 & 0.71 & 0.62 & 0.66 & 0.50 & 0.57 \\
-			Multi-Layer Perceptron & 0.77 & 0.78 & 0.78 & 0.81 & 0.79 & 0.80 \\
-			Decision Tree & 0.71 & 0.42 & 0.53 & 0.63 & 0.85 & 0.72 \\
+			NB & 0.79 & 0.77 & 0.78 & 0.80 & 0.82 & 0.81 \\
+			RL & 0.80 & 0.79 & 0.79 & 0.82 & 0.82 & 0.82 \\
+			SVM & 0.80 & 0.80 & 0.80 & 0.82 & 0.82 & 0.82 \\
+			RF & 0.79 & 0.66 & 0.72 & 0.74 & 0.84 & 0.79 \\
+			KNN & 0.56 & 0.71 & 0.62 & 0.66 & 0.50 & 0.57 \\
+			MLP & 0.77 & 0.78 & 0.78 & 0.81 & 0.79 & 0.80 \\
+			DT & 0.71 & 0.42 & 0.53 & 0.63 & 0.85 & 0.72 \\
 			LightGBM & 0.77 & 0.80 & 0.79 & 0.82 & 0.79 & 0.81 \\
 			AdaBoost & 0.74 & 0.79 & 0.77 & 0.80 & 0.76 & 0.78 \\
 			SGD & 0.79 & 0.80 & 0.80 & 0.82 & 0.81 & 0.82 \\
@@ -63,7 +63,7 @@ No cenário da base Letterboxd com pré-processamento, pode-se observar que os \
 	}
 \end{table}
 
-No da base Letterboxd sem pré-processamento, pode-se observar melhorias nos resultados. Os modelos lineares ainda foram superiores, com F1-Scores próximos a \textit{0.82}. Isso sugere que o pré-processamento aplicado pode ter removido informações relevantes do texto, ou seja, a remoção de palavras neste caso prejudicou o desempenho do modelo. Os modelos \textit{KNN} e \textit{Decision Tree} ainda tiveram um desempenho abaixo, e os demais foram intermediários.
+No contexto da base Letterboxd sem pré-processamento, pode-se observar melhorias nos resultados. Os modelos lineares ainda foram superiores, com F1-Scores próximos a \textit{0.82}. Isso sugere que o pré-processamento aplicado pode ter removido informações relevantes do texto, ou seja, a remoção de palavras neste caso prejudicou o desempenho do modelo. Os modelos \textit{KNN} e \textit{Decision Tree} ainda tiveram um desempenho abaixo, e os demais foram intermediários.
 
 
 \begin{table}[H]
@@ -76,13 +76,13 @@ No da base Letterboxd sem pré-processamento, pode-se observar melhorias nos res
 			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
 			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
 			\midrule
-			Naive Bayes & 0.87 & 0.83 & 0.85 & 0.84 & 0.88 & 0.86 \\
-			Regressão Logística & 0.90 & 0.88 & 0.89 & 0.88 & 0.90 & 0.89 \\
-			SVM Linear & 0.91 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
-			Random Forest & 0.87 & 0.82 & 0.84 & 0.83 & 0.87 & 0.85 \\
-			K-Nearest Neighbors & 0.78 & 0.63 & 0.70 & 0.69 & 0.82 & 0.75 \\
-			Multi-Layer Perceptron & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 \\
-			Decision Tree & 0.76 & 0.66 & 0.71 & 0.70 & 0.79 & 0.74 \\
+			NB & 0.87 & 0.83 & 0.85 & 0.84 & 0.88 & 0.86 \\
+			RL & 0.90 & 0.88 & 0.89 & 0.88 & 0.90 & 0.89 \\
+			SVM  & 0.91 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			RF & 0.87 & 0.82 & 0.84 & 0.83 & 0.87 & 0.85 \\
+			KNN & 0.78 & 0.63 & 0.70 & 0.69 & 0.82 & 0.75 \\
+			MLP & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 \\
+			DT & 0.76 & 0.66 & 0.71 & 0.70 & 0.79 & 0.74 \\
 			LightGBM & 0.88 & 0.85 & 0.86 & 0.85 & 0.89 & 0.87 \\
 			AdaBoost & 0.86 & 0.83 & 0.85 & 0.84 & 0.87 & 0.85 \\
 			SGD & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 & 0.88 \\
@@ -103,13 +103,13 @@ Na base do IMDb sem pré-processamento, que é uma base mais estruturada, os mod
 			\cmidrule(lr){2-4} \cmidrule(lr){5-7}
 			& \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Precisão} & \textbf{Recall} & \textbf{F1-Score} \\
 			\midrule
-			Naive Bayes & 0.87 & 0.84 & 0.86 & 0.84 & 0.88 & 0.86 \\
-			Regressão Logística & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
-			SVM Linear & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
-			Random Forest & 0.87 & 0.81 & 0.84 & 0.82 & 0.88 & 0.85 \\
-			K-Nearest Neighbors & 0.74 & 0.69 & 0.71 & 0.71 & 0.75 & 0.73 \\
-			Multi-Layer Perceptron & 0.88 & 0.86 & 0.87 & 0.86 & 0.88 & 0.87 \\
-			Decision Tree & 0.79 & 0.64 & 0.71 & 0.70 & 0.83 & 0.76 \\
+			NB & 0.87 & 0.84 & 0.86 & 0.84 & 0.88 & 0.86 \\
+			RL & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			SVM  & 0.90 & 0.88 & 0.89 & 0.88 & 0.91 & 0.89 \\
+			RF  & 0.87 & 0.81 & 0.84 & 0.82 & 0.88 & 0.85 \\
+			KNN & 0.74 & 0.69 & 0.71 & 0.71 & 0.75 & 0.73 \\
+			MLP & 0.88 & 0.86 & 0.87 & 0.86 & 0.88 & 0.87 \\
+			DT & 0.79 & 0.64 & 0.71 & 0.70 & 0.83 & 0.76 \\
 			LightGBM & 0.88 & 0.84 & 0.86 & 0.85 & 0.89 & 0.87 \\
 			AdaBoost & 0.87 & 0.84 & 0.86 & 0.85 & 0.88 & 0.86 \\
 			SGD & 0.91 & 0.86 & 0.89 & 0.87 & 0.92 & 0.89 \\
@@ -118,24 +118,19 @@ Na base do IMDb sem pré-processamento, que é uma base mais estruturada, os mod
 	}
 \end{table}
 
-Por fim, na base do IMDb com pré-processamento, pode-se observar que as métricas dos melhores modelos foram praticamente idênticas às do cenário sem pré-processamento. Isso indica que a base do IMDb já é bem estruturada e suficientemente limpa para que o pré-processamento adicional não traga benefícios e nem prejudique. Os mesmos modelos foram superiores (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}), com valores entre \textit{0.88} e \textit{0.89}, enquanto o \textit{KNN} e a \textit{Decision Tree} ainda foram os menos eficazes.
+Por fim, na base do IMDb com pré-processamento, pode-se observar que as métricas dos melhores modelos foram praticamente idênticas às do cenário sem pré-processamento, ou seja, pode ser melhor não realizar o pré-processamento nesse dataset, tendo em vista que é muito custoso computacionalmente, principalmente para bases tão grandes. Isso indica também que a base do IMDb já é bem estruturada e suficientemente limpa para que o pré-processamento adicional não traga benefícios e nem prejudique. Os mesmos modelos foram superiores (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}), com valores entre \textit{0.88} e \textit{0.89}, enquanto o \textit{KNN} e a \textit{Decision Tree} ainda foram os menos eficazes.
 
-Em resumo, os resultados demonstram que \textit{classificadores lineares} (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}) são os mais adequados para a tarefa de análise de sentimento utilizando a representação \textit{TF-IDF}, mostrando eficácia superior tanto em bases menores (Letterboxd) quanto em bases maiores e mais estruturadas (IMDb).
+Em resumo, os resultados demonstram que \textit{classificadores lineares} (\textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}) são os mais adequados para a tarefa de análise de sentimento utilizando a representação \textit{TF-IDF}  mostrando eficácia superior tanto em bases menores (Letterboxd) quanto em bases maiores e mais estruturadas (IMDb). Isso ocorreu porque seus datasets são binários. Ou seja, o que podemos concluir é que esse classificadores tiveram os melhores resultados, no contexto estudado. Não podemos concluir que serão os melhores sempre e em qualquer tarefa de análise de sentimentos.
 
-Os modelos \textit{KNN} e \textit{Decision Tree} apresentaram um desempenho consistentemente inferior em todos os cenários. Contudo, seu uso foi relevante ao contribuir com a \textit{diversidade de métodos} nos esquemas de \textit{ensemble}.
+Os modelos \textit{KNN} e \textit{Decision Tree} apresentaram um desempenho consistentemente inferior em todos os cenários. Contudo, seu uso foi relevante ao contribuir com a diversidade de métodos nos esquemas de \textit{ensemble}.
 
 Já os modelos baseados em árvores (\textit{Random Forest}, \textit{LightGBM} e \textit{AdaBoost}) exibiram um desempenho intermediário, porém satisfatório, posicionando-se como opções robustas.
 
-Tais achados reforçam o que é estabelecido na literatura: \textit{modelos lineares são frequentemente superiores} quando se trata de classificação textual com TF-IDF. Além disso, a análise evidenciou o \textit{impacto variável do pré-processamento} em diferentes bases, podendo prejudicar, melhorar ou não ter efeito, dependendo da base.
-
-
-porem
-
-
+Tais achados reforçam o que é estabelecido na literatura: \textit{modelos lineares são frequentemente superiores} quando se trata de classificação textual com TF-IDF. \cite{hassan2022analytics, galke2022we, kucuk2024comparative} Além disso, a análise evidenciou o impacto variável do pré-processamento em diferentes bases, podendo prejudicar, melhorar ou não ter efeito, dependendo da base.
 
 \section{DESEMPENHO DOS ENSEMBLES SEM SELEÇÃO}
 
-Uma das etapas dos experimentos foi a avaliação do ensemble sem seleção, com o objetivo de observar o comportamento e como a \textit{diversidade de modelos} impacta a performance do ensemble tanto no \textit{Voting} quanto no \textit{Stacking}.
+Uma das etapas dos experimentos foi a avaliação do \textit{ensemble} sem seleção, com o objetivo de observar o comportamento e como a diversidade de modelos impacta a performance do \textit{ensemble} tanto no \textit{Voting} quanto no \textit{Stacking}.
 
 \begin{table}[H]
 	\centering
@@ -152,7 +147,7 @@ Uma das etapas dos experimentos foi a avaliação do ensemble sem seleção, com
 	\end{tabular}
 \end{table}
 
-Na base \textit{Letterboxd com pré-processamento}, os resultados mostraram que o \textit{Stacking} obteve um desempenho superior, conseguindo atingir um F1-Score de \textit{0.81} e \textit{0.83} nas duas classes, enquanto o \textit{Voting} obteve valores de \textit{0.80} e \textit{0.81}. O Stacking foi capaz de aproveitar melhor essa diferença entre os modelos.
+Na base \textit{Letterboxd} com pré-processamento, os resultados mostraram que o \textit{Stacking} obteve um desempenho superior, conseguindo atingir um F1-Score de \textit{0.81} e \textit{0.83} nas duas classes, enquanto o \textit{Voting} obteve valores de \textit{0.80} e \textit{0.81}. O Stacking foi capaz de aproveitar melhor essa diferença entre os modelos.
 
 \begin{table}[H]
 	\centering
@@ -169,7 +164,7 @@ Na base \textit{Letterboxd com pré-processamento}, os resultados mostraram que 
 	\end{tabular}
 \end{table}
 
-Na versão \textit{sem pré-processamento} da Letterboxd, ambos os ensembles obtiveram desempenho semelhante, com F1-Scores entre \textit{0.80} e \textit{0.82}. O Stacking ainda apresentou um leve ganho na classe positiva, mas a diferença geral foi menor do que a observada no cenário com pré-processamento.
+Na versão sem pré-processamento da Letterboxd, ambos os ensembles obtiveram desempenho semelhante, com F1-Scores entre \textit{0.80} e \textit{0.82}. O Stacking ainda apresentou um leve ganho na classe positiva, mas a diferença geral foi menor do que a observada no cenário com pré-processamento.
 
 \begin{table}[ht]
 	\centering
@@ -187,7 +182,7 @@ Na versão \textit{sem pré-processamento} da Letterboxd, ambos os ensembles obt
 \end{table}
 
 
-Na base \textit{IMDb sem pré-processamento}, os ensembles atingiram ótimos resultados. Tanto o \textit{Voting} quanto o \textit{Stacking} alcançaram F1-Scores próximos de \textit{0.90}. O Stacking ainda apresentou um leve ganho, mas, na prática, ambos os métodos tiveram desempenho muito similar.
+Na base \textit{IMDb} sem pré-processamento, os ensembles atingiram ótimos resultados. Tanto o \textit{Voting} quanto o \textit{Stacking} alcançaram F1-Scores próximos de \textit{0.90}. O Stacking ainda apresentou um leve ganho, mas, na prática, ambos os métodos tiveram desempenho muito similar.
  
 
 \begin{table}[H]
@@ -205,7 +200,7 @@ Na base \textit{IMDb sem pré-processamento}, os ensembles atingiram ótimos res
 	\end{tabular}
 \end{table}
 
-Para finalizar, na base do \textit{IMDb com pré-processamento}, os resultados foram bem parecidos com os do cenário sem pré-processamento, porém houve um leve ganho tanto no Voting quanto no Stacking. Com isso, confirma-se que o desempenho na base IMDb \textit{não é fortemente influenciado pelo pré-processamento}, e ensembles de grande porte podem ser \textit{robustos} mesmo com variações no tratamento do texto.
+Para finalizar, na base do \textit{IMDb} com pré-processamento, os resultados foram bem parecidos com os do cenário sem pré-processamento, porém houve um leve ganho tanto no Voting quanto no Stacking. Com isso, confirma-se que o desempenho na base IMDb \textit{não é fortemente influenciado pelo pré-processamento}, e ensembles de grande porte podem ser robustos mesmo com variações no tratamento do texto.
 
 Os resultados mostraram que \textit{ensembles} com 10 modelos apresentam um desempenho bastante sólido em diversos cenários. Quando há ruído, o \textit{stacking} tende a ser superior ao \textit{voting}, enquanto o \textit{voting} já tem um bom desempenho quando os modelos base são mais consistentes.
 
@@ -215,18 +210,18 @@ Nesta seção, serão mostrados os resultados dos \textit{ensembles} construído
 As tabelas a seguir mostram os valores das acuracias de cada modelo que foram usadas como base para a formação dos ensembles:
 \begin{table}[H]
 	\centering
-	\caption{Acurácia dos Modelos Individuais (LETTER - Sem Pré-Processamento)}
+	\caption{Acurácia dos Modelos Individuais (Letterboxd - Sem Pré-Processamento)}
 	\begin{tabular}{lc}
 		\toprule
 		\textbf{Modelo} & \textbf{Acurácia} \\
 		\midrule
-		Naive Bayes & 0.7950 \\
-		Regressão Logística & 0.8076 \\
-		SVM Linear & 0.8101 \\
-		Random Forest & 0.7577 \\
-		K-Nearest Neighbors & 0.5971 \\
-		Multi-Layer Perceptron & 0.7882 \\
-		Decision Tree & 0.6497 \\
+		NB & 0.7950 \\
+		RL & 0.8076 \\
+		SVM & 0.8101 \\
+		RF & 0.7577 \\
+		KNN & 0.5971 \\
+		MLP & 0.7882 \\
+		DT & 0.6497 \\
 		LightGBM & 0.7967 \\
 		AdaBoost & 0.7744 \\
 		SGD & 0.8078 \\
@@ -239,18 +234,18 @@ As tabelas a seguir mostram os valores das acuracias de cada modelo que foram us
 
 \begin{table}[H]
 	\centering
-	\caption{Acurácia dos Modelos Individuais (LETTER - Com Pré-Processamento)}
+	\caption{Acurácia dos Modelos Individuais (Letterboxd - Com Pré-Processamento)}
 	\begin{tabular}{lc}
 		\toprule
 		\textbf{Modelo} & \textbf{Acurácia} \\
 		\midrule
-		Naive Bayes & 0.7981 \\
-		Regressão Logística & 0.8118 \\
-		SVM Linear & 0.8107 \\
-		Random Forest & 0.7645 \\
-		K-Nearest Neighbors & 0.5833 \\
-		Multi-Layer Perceptron & 0.7972 \\
-		Decision Tree & 0.6583 \\
+		NB & 0.7981 \\
+		RL & 0.8118 \\
+		SVM  & 0.8107 \\
+		RF & 0.7645 \\
+		KNN & 0.5833 \\
+		MLP & 0.7972 \\
+		DT & 0.6583 \\
 		LightGBM & 0.7916 \\
 		AdaBoost & 0.7769 \\
 		SGD & 0.8099 \\
@@ -262,18 +257,18 @@ As tabelas a seguir mostram os valores das acuracias de cada modelo que foram us
 
 \begin{table}[H]
 	\centering
-	\caption{Acurácia dos Modelos Individuais (IMDB - Sem Pré-Processamento)}
+	\caption{Acurácia dos Modelos Individuais (IMDb - Sem Pré-Processamento)}
 	\begin{tabular}{lc}
 		\toprule
 		\textbf{Modelo} & \textbf{Acurácia} \\
 		\midrule
-		Naive Bayes & 0.8584 \\
-		Regressão Logística & 0.8924 \\
-		SVM Linear & 0.8930 \\
-		Random Forest & 0.8426 \\
-		K-Nearest Neighbors & 0.7226 \\
-		Multi-Layer Perceptron & 0.8694 \\
-		Decision Tree & 0.7330 \\
+		NB & 0.8584 \\
+		RL & 0.8924 \\
+		SVM  & 0.8930 \\
+		RF & 0.8426 \\
+		KNN & 0.7226 \\
+		MLP & 0.8694 \\
+		DT & 0.7330 \\
 		LightGBM & 0.8634 \\
 		AdaBoost & 0.8616 \\
 		SGD & 0.8894 \\
@@ -285,18 +280,18 @@ As tabelas a seguir mostram os valores das acuracias de cada modelo que foram us
 
 \begin{table}[H]
 	\centering
-	\caption{Acurácia dos Modelos Individuais (IMDB - Com Pré-Processamento)}
+	\caption{Acurácia dos Modelos Individuais (IMDb - Com Pré-Processamento)}
 	\begin{tabular}{lc}
 		\toprule
 		\textbf{Modelo} & \textbf{Acurácia} \\
 		\midrule
-		Naive Bayes & 0.8538 \\
-		Regressão Logística & 0.8902 \\
-		SVM Linear & 0.8930 \\
-		Random Forest & 0.8466 \\
-		K-Nearest Neighbors & 0.7286 \\
-		Multi-Layer Perceptron & 0.8784 \\
-		Decision Tree & 0.7274 \\
+		NB & 0.8538 \\
+		RL & 0.8902 \\
+		SVM  & 0.8930 \\
+		RF & 0.8466 \\
+		KNN & 0.7286 \\
+		MLP & 0.8784 \\
+		DT & 0.7274 \\
 		LightGBM & 0.8658 \\
 		AdaBoost & 0.8510 \\
 		SGD & 0.8816 \\
@@ -304,9 +299,11 @@ As tabelas a seguir mostram os valores das acuracias de cada modelo que foram us
 	\end{tabular}
 \end{table}
 
- 
+Os valores de acurácia apresentados nesta seção são fundamentais para identificar os modelos com melhor desempenho em cada cenário e, assim, orientar a composição dos \textit{ensembles}, tanto pela estratégia de Seleção por Acurácia (SA) quanto pela Seleção por Acurácia e Diversidade (SAD). Foi observado que os modelos que tiveream um desempenho superior foram: Regressão Logística, SVM e SGD.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
+
+Nesta subseção, analisam-se os \textit{ensembles} compostos por dois modelos, selecionados pela estratégia de Seleção por Acurácia (SA), destacando o impacto da escolha dos modelos sobre o desempenho geral do ensemble.
 
 \begin{table}[H]
 	\centering
@@ -374,6 +371,8 @@ Nos \textit{ensembles} com 2 modelos, pode-se observar que a combinação foi fe
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
 
+Nesta subseção, analisam-se os \textit{ensembles} compostos por três modelos, selecionados pela estratégia de Seleção por Acurácia (SA), demonstrando o impacto da adição do terceiro modelo na performance geral do \textit{ensemble}.
+
 \begin{table}[H]
 	\centering
 	\caption{Métricas para Ensembles SA 3 modelos: Regressão Logística, SVM Linear, SGD(Letterboxd - Com Pré-Processamento)}
@@ -437,6 +436,8 @@ Nos \textit{ensembles} com 2 modelos, pode-se observar que a combinação foi fe
 Nos \textit{ensembles} formados por 3 modelos, com a adição de mais um modelo, que ainda foi um modelo linear, tanto o \textit{voting} quanto o \textit{stacking} mantiveram o desempenho do \textit{ensemble} com dois modelos. Isso mostra que, quando os classificadores são muito parecidos em comportamento e estrutura, os ganhos são limitados.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
+
+Já nesta subseção, analisam-se os \textit{ensembles} compostos por quatro modelos, selecionados pela estratégia de Seleção por Acurácia (SA), demonstrando como a inclusão do quarto modelo influencia os resultados e o desempenho geral do \textit{ensemble}.
 
 
 \begin{table}[H]
@@ -504,6 +505,8 @@ Nos \textit{ensembles} formados por 3 modelos, com a adição de mais um modelo,
 Com a inclusão de um quarto modelo, puderam ser notados pequenos ganhos de diversidade, principalmente nas bases do \textit{Letterboxd}. A presença de um método diferente (\textit{Naive Bayes} ou \textit{LightGBM}) contribuiu para uma leve melhoria no equilíbrio entre precisão e \textit{recall} em algumas classes; contudo, esses ganhos foram discretos e não superaram de maneira expressiva os \textit{ensembles} com 3 modelos.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
+
+Por fim, nesta subseção, analisam-se os \textit{ensembles} compostos por cinco modelos, selecionados pela estratégia de Seleção por Acurácia (SA), demonstrando como a ampliação do \textit{ensemble} afeta sua capacidade de generalização e desempenho sobre o conjunto de dados.
 
 
 \begin{table}[H]
@@ -579,6 +582,8 @@ Na abordagem \textit{SAD} (Seleção por Acurácia e Diversidade), temos a combi
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 2 MODELOS}
 
+Nesta subseção, apresentam-se os resultados obtidos pelos \textit{ensembles} compostos por dois modelos, construídos a partir da técnica de Seleção por Acurácia e Diversidade (SAD), nos quais são mostradas as métricas de desempenho por classe, permitindo identificar quais pares apresentam melhor desempenho no \textit{ensemble}.
+
 \begin{table}[H]
 	\centering
 	\caption{Métricas para Ensembles SAD 2 modelos: RandomForest, KNN (Letterboxd - Com Pré-Processamento)}
@@ -646,6 +651,8 @@ Nos \textit{ensembles} com 2 modelos, pode-se observar como o método \textit{SA
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 3 MODELOS}
 
+Aqui, apresentam-se os resultados obtidos pelos \textit{ensembles} compostos por três modelos, construídos a partir da técnica de Seleção por Acurácia e Diversidade (SAD), mostrando o efeito da adição de um terceiro modelo sobre a performance geral do \textit{ensemble}.
+
 
 \begin{table}[H]
 	\centering
@@ -711,6 +718,8 @@ Nos \textit{ensembles} com 2 modelos, pode-se observar como o método \textit{SA
 Adicionando mais um modelo, pôde-se perceber um comportamento mais sólido nos \textit{ensembles}, tanto no \textit{Voting} quanto no \textit{Stacking}. A inclusão de um terceiro classificador aumentou a capacidade de equilíbrio entre a precisão e o \textit{recall}, principalmente na base do \textit{Letterboxd}. No cenário pré-processado, o \textit{ensemble} formado por \textit{MLP}, \textit{Random Forest} e \textit{KNN} apresentou F1-Scores entre \textit{0.79} e \textit{0.82}, enquanto na versão sem pré-processamento os resultados permaneceram próximos, mas com menos estabilidade. Na base \textit{IMDb}, os modelos escolhidos pelo \textit{SAD} (\textit{MLP}, \textit{Random Forest} e \textit{KNN}, ou \textit{LightGBM}, \textit{MLP} e \textit{Random Forest}) alcançaram um desempenho consistentemente alto, chegando a F1-Scores de \textit{0.89} para \textit{voting} e \textit{0.90} para \textit{stacking}. Isso mostra que, ao contrário da seleção apenas por acurácia, a seleção por acurácia e diversidade tende a produzir benefícios quando combina modelos de naturezas distintas.
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 4 MODELOS}
+
+Já nesta parte, apresentam-se os resultados obtidos pelos \textit{ensembles} compostos por quatro modelos, construídos a partir da técnica de Seleção por Acurácia e Diversidade (SAD), mostrando como a inserção de um quarto modelo impacta a eficácia. 
 
 
 \begin{table}[H]
@@ -779,6 +788,8 @@ Nos \textit{ensembles} compostos por 4 modelos, a técnica \textit{SAD} demonstr
 
 
 \subsection{DESEMPENHO DOS ENSEMBLES COM 5 MODELOS}
+
+Por fim, nesta subseção, apresentam-se os resultados obtidos pelos \textit{ensembles} compostos por cinco modelos, construídos a partir da técnica de Seleção por Acurácia e Diversidade (SAD), analisando como a ampliação do ensemble com um quinto modelo impacta as métricas de desempenho.
 
 
 \begin{table}[H]
