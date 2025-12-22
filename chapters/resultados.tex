@@ -1,5 +1,5 @@
 
-\chapter{Resultados e Discursões}\label{resultados}
+\chapter{Resultados e Discussões}\label{resultados}
 
 Nesta seção, são apresentados todos os dados e resultados obtidos ao longo dos experimentos. Primeiro, descrevem-se as métricas de avaliação dos modelos de classificação individuais utilizados no estudo. Em seguida, são exibidas as métricas dos ensembles construídos por meio das diferentes estratégias de seleção. Por fim, são realizadas comparações entre os modelos e discutidos os resultados observados, destacando o impacto das técnicas aplicadas no desempenho final.  
 
@@ -13,7 +13,7 @@ As tabelas a seguir detalham os resultados obtidos para cada cenário, apresenta
 
 \begin{table}[H]
 	\centering
-	\caption{Métricas dos Modelos Individuais(Letterborxd - Com Pré-Processamento	)}
+	\caption{Métricas dos Modelos Individuais(Letterboxd - Com Pré-Processamento	)}
 	\resizebox{\textwidth}{!}{
 		\begin{tabular}{lcccccc}
 			\toprule
@@ -877,4 +877,8 @@ A comparação entre os três tipos de seleção e as técnicas de \textit{ensem
 A seleção por acurácia (\textit{SA}) mostrou um comportamento que já era esperado e eficiente, pois priorizou os modelos de melhor desempenho individual, principalmente os \textit{modelos lineares}, como \textit{SVM Linear}, \textit{Regressão Logística} e \textit{SGD}. Nesse cenário, os \textit{ensembles} tornaram-se eficazes com poucos modelos em sua composição (a partir de 3), o que os torna mais rápidos no treinamento que os \textit{ensembles} maiores. Os \textit{ensembles} com 3 modelos já produziam resultados idênticos aos modelos com 4 e 5. Esses \textit{ensembles} pequenos, dominados por modelos lineares, especialmente na base de dados \textit{IMDb}, dominaram o problema de classificação.
 
 Já na seleção por acurácia e diversidade (\textit{SAD}), os resultados tiveram padrões distintos. Modelos com desempenho mais modestos passaram a compor o \textit{ensemble}, aumentando a diversidade e complementando as previsões. Contudo, isso resultou em um \textit{Voting} menos estável, especialmente na base de dados do \textit{Letterboxd}, onde diferenças muito grandes entre os classificadores geraram decisões conflitantes. No entanto, com o \textit{Stacking}, essa diversidade foi uma vantagem que superou o \textit{Voting} em praticamente todos os cenários e aproximou-se dos melhores resultados obtidos pela \textit{SA}. Em bases com mais ruído, como a do \textit{Letterboxd}, a diversidade contribuiu para o equilíbrio entre precisão e \textit{recall}.
+
+Os resultados obtidos neste estudo corroboram e expandem as evidências encontradas na literatura correlata, demonstrando que o uso de ensembles heterogêneos é uma estratégia robusta para a análise de sentimentos. Assim como observado por \textcite{kazmaier2022power}, que alcançaram melhorias de até 5,53\% com a combinação de modelos, e por \textcite{kilimci2018deep}, cujos ensembles superaram classificadores individuais em todos os cenários, este trabalho confirmou que a diversidade entre modelos é um fator determinante para o ganho de desempenho, especialmente por meio da técnica de Stacking. Enquanto o estudo de \textcite{inbook} destacou a competitividade de representações simples como o TF-IDF, esta pesquisa reafirmou a supremacia de modelos lineares (SVM, Regressão Logística e SGD) quando associados a essa vetorização. Por fim, a introdução da base inédita do Letterboxd permitiu observar que a eficácia do pré-processamento é variável e dependente do domínio, reforçando a conclusão de \textcite{ribeiro2016sentibench} de que não existe um método universalmente superior para todas as bases de dados.
+
+
 

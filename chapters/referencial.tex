@@ -1,0 +1,115 @@
+\chapter{Referencial Teórico}
+
+
+\section{MODELOS DE MACHINE LEARNING E ENSEMBLE LEARNING}
+
+Machine Learning é um ramo da Inteligência Artificial cujo principal objetivo é desenvolver métodos que permitam que os computadores aprendam a realizar tarefas a partir de dados, sem que tenham sido programados explicitamente para cada situação específica. Esse aprendizado ocorre por meio da identificação de padrões e regularidades em grandes volumes de dados \cite{alpaydin2021machine}.
+
+\subsection{NAIVE BAYES(NB)}
+O algoritmo Naive Bayes (NB) é um classificador estatístico tradicional amplamente utilizado devido à sua estrutura simples, alta eficiência computacional e bom desempenho, mesmo com conjuntos de dados reduzidos \cite{chen2021improved}. É empregado em diversas aplicações reais, como sistemas de recomendação de produtos e diagnóstico médico, sendo considerado um dos algoritmos de melhor desempenho em tarefas de mineração de dados \cite{wickramasinghe2021naive}. 
+
+O NB é descrito como um método de aprendizado de máquina que utiliza conceitos de probabilidade e estatística para realizar classificações, sendo eficaz na previsão de eventos futuros com base em experiências passadas \cite{dwiramadhan2022sistem}.
+Apesar de sua simplicidade, o NB é eficaz e robusto. No entanto, assume a independência entre as características dos dados, o que pode não refletir a realidade em certas aplicações. Ainda assim, o algoritmo pode apresentar bom desempenho mesmo quando há dependência entre atributos \cite{wickramasinghe2021naive}.
+
+\subsection{RANDOM FOREST(RF)}
+O classificador Random Forest (RF) é uma técnica de aprendizado de máquina supervisionado amplamente utilizada para tarefas de classificação e regressão. Sua operação baseia-se no princípio do ensemble learning, combinando diversas árvores de decisão, cada uma treinada com subconjuntos diferentes dos dados, a fim de melhorar a acurácia das previsões e reduzir o risco de sobreajuste (overfitting) associado a árvores individuais \cite{sun2024improved}. A previsão final do modelo é obtida por meio da votação da maioria (em problemas de classificação) ou pela média (em problemas de regressão) das saídas das árvores componentes \cite{gupta2022pca}.
+
+O desempenho do Random Forest tende a melhorar com o aumento do número de árvores na floresta \cite{amiri2024faults}. Entre suas principais vantagens, destacam-se a robustez contra o sobreajuste, a capacidade de lidar com grandes volumes de dados e variáveis, bem como a boa performance preditiva, mesmo em contextos com dados ruidosos ou incompletos \cite{amini2022urban, purwanto2022decision}.
+
+\subsection{SUPPORT VECTOR MACHINE(SVM)}
+O algoritmo Support Vector Machine (SVM) é amplamente reconhecido por sua eficácia em tarefas de classificação, sendo aplicado com sucesso em áreas como reconhecimento facial, diagnóstico de doenças, reconhecimento de texto e, especialmente, análise de sentimentos \cite{abdullah2021machine}. Sua popularidade decorre da capacidade de lidar bem com conjuntos de dados pequenos, problemas não lineares e de alta dimensionalidade.
+
+Uma das principais vantagens do SVM é sua busca por uma solução ótima global, o que contribui para altos níveis de acurácia em tarefas preditivas. No entanto, seu desempenho depende fortemente da escolha adequada da função kernel, responsável por projetar os dados em espaços de maior dimensionalidade, onde a separação entre as classes torna-se viável. Apesar de competitivo, especialmente em bases com poucas amostras, o SVM pode enfrentar limitações quando aplicado a grandes volumes de dados, devido ao aumento da complexidade computacional \cite{abdullah2021machine}.
+
+\subsection{REGRESSÃO LOGÍSTICA(RL)}
+A Regressão Logística é amplamente utilizada como um método estatístico simples e eficaz para resolver problemas de classificação binária, como o acontecimento ou não de um evento \cite{zhou2021machine}. Ela permite estimar como variáveis independentes influenciam a probabilidade de um desfecho, podendo ser aplicada em áreas médicas, industriais e em modelos preditivos. A Regressão Logística transforma o desfecho binário em uma variável contínua que é chamada de \textit{Logit} (logaritmo de chances), possibilitando modelar a relação entre preditores e o resultado. A partir dos coeficientes do modelo, é possível calcular probabilidades e interpretar o efeito das variáveis por meio dos \textit{Odds Ratio} (OR), que indica como a chance de um evento muda conforme cada preditor varia. Odds Ratios maiores que 1 aumentam a chance do evento; menores que 1, reduzem. Algumas condições precisam ser atendidas para que o modelo seja válido: independência entre as observações, relação linear entre variáveis contínuas e o Logit, ausência de colinearidade entre preditores e inexistência de outliers influentes.\cite{ZABOR2022271}
+
+
+
+\subsection{K-NEAREST NEIGHBORS(KNN)}
+O \textit{K-Nearest Neighbors} (KNN) é um algoritmo de aprendizado supervisionado usado principalmente em tarefas de classificação. A ideia desse modelo é que novos dados podem ser classificados por seus $K$ vizinhos mais próximos do conjunto de treinamento. Ele calcula as distâncias entre os pontos de consulta e identifica os $K$ mais próximos. Após isso, realiza uma votação majoritária, atribuindo ao novo ponto a classe mais frequente entre seus vizinhos.\cite{Uddin2022}
+Ele possui diversas aplicações que vão desde \textit{IoT} (\textit{Internet das Coisas}) até sistemas de recomendação, e tem um papel relevante em sistemas modernos relacionados à Indústria 4.0.
+Ele é um método não-paramétrico e de aprendizado baseado em instâncias, ou seja, não é construído um modelo explícito durante o treinamento; ele apenas realiza cálculos quando recebe uma nova entrada. Seu princípio fundamental é que instâncias semelhantes tendem a estar próximas no espaço, permitindo prever a classe de uma nova amostra com base na similaridade dos exemplos existentes.\cite{Halder2024}
+
+\subsection{DECISION TREE(DT)}
+O modelo Decision Tree (DT) é uma técnica bastante utilizada em \textit{machine learning}, processamento de imagens e reconhecimento de padrões. Esse modelo tem uma estrutura hierárquica de testes simples, em que os atributos numéricos são comparados a valores de corte para gerar regras fáceis de interpretar, diferente de modelos mais complexos. Por sua simplicidade, os DT possuem diversas aplicações práticas. Existem alguns tipos de DT, como os mais antigos ID3, C4.5 e CART, que têm diferenças nos critérios de divisão, variáveis aceitas e estratégias de poda.
+Esse modelo funciona por meio de alguns conceitos, como a entropia e o ganho de informação. A entropia mede a impureza dos dados, sendo que, quanto mais próximo de zero, melhor, e o ganho de informação indica o quanto a divisão dos dados reduz essa impureza nesse caso, quanto mais alto, melhor. Os modelos DT apresentam vantagens como facilidade de interpretação, velocidade e capacidade de trabalhar tanto com dados categóricos como numéricos, porém há limitações, como sensibilidade ao aumento do número de amostras e suscetibilidade a decisões subótimas quando mal configurados.\cite{charbuty2021classification}
+
+\subsection{MULTI-LAYER PERCEPTRON(MLP)} 
+O Multi-Layer Perceptron (MLP) é uma rede neural do tipo \textit{feed-forward} que é muito utilizada em tarefas de classificação, regressão e predição em vários domínios, como detecção de intrusões e na saúde. Ele é composto de três tipos de camada: camada de entrada, camada oculta (que pode ser mais de uma) e camada de saída. Essas camadas são responsáveis por coletar as características, extrair padrões e gerar previsões. É um modelo que é capaz de aprender tanto funções lineares quanto não lineares.\cite{albataineh2022mlppso}
+
+O seu funcionamento é baseado principalmente por meio do algoritmo de retropropagação, que ajusta os pesos e vieses para que o erro possa ser minimizado entre as saídas. Para que funcione, as funções de ativação, como \textit{sigmoid} e \textit{reLU}, devem ser diferenciáveis, para que possa se introduzir a não linearidade e possibilitar o cálculo do gradiente. As escolhas do número de neurônios, camadas ocultas e funções de ativação são os hiperparâmetros do modelo. É um modelo em que pode ser difícil otimizar esses hiperparâmetros, já que podem haver cenários onde os dados apresentam alta variabilidade.\cite{albataineh2022mlppso, naskath2023deeplearning}
+
+
+\subsection{ADABOOST}
+O AdaBoost é um método de ensemble baseado na reponderação dos exemplos de treinamento, permitindo que o algoritmo apresente bom desempenho mesmo quando há poucos dados disponíveis. Inicialmente, todos os exemplos recebem pesos iguais. A cada iteração, um classificador fraco é treinado considerando a distribuição de pesos atual. Em seguida, calcula-se o erro ponderado desse classificador e determina-se sua importância no modelo final.
+Exemplos classificados incorretamente têm seus pesos aumentados, enquanto os corretamente classificados têm seus pesos reduzidos, fazendo com que o algoritmo concentre a atenção nos casos mais difíceis. Após várias iterações, o AdaBoost combina todos os classificadores fracos, ponderando cada um pelo seu desempenho, e produz um classificador final obtido pelo sinal da soma ponderada das predições.\cite{ding2022efficient, ramakrishna2023homogeneous}
+
+
+\subsection{STOCHASTIC GRADIENT DESCENT(SGD)}
+O \textit{Stochastic Gradient Descent} (SGD) é uma técnica bastante reconhecida por ser simples e eficiente, sendo muito indicada para treinar classificadores lineares e regressores, como \textit{SVM} e Regressão Logística. Uma das principais vantagens é a facilidade de implementação e a eficiência, que o fazem ser apropriado para problemas de grande escala e para cenários com dados esparsos, o que acontece em classificação de textos e tarefas de \textit{Processamento de Linguagem Natural}. \cite{Pinho2024}
+
+No caso do classificador, é implementado um modelo linear regularizado treinado por meio do SGD, em que o gradiente da função de perda é estimado a cada amostra individual, permitindo sempre atualizações contínuas. O SGD é um modelo que, do ponto de vista prático, é bastante eficiente e ajustável, oferecendo muitas opções para o processo de aprendizagem, como a taxa de aprendizado, o que favorece um refinamento de um treinamento muito mais eficaz. \cite{tsuruoka2009stochastic}
+
+
+\subsection{LIGHTGBM}
+O LightGBM é um algoritmo que foi desenvolvido pela Microsoft e é baseado no Gradient Boosting Decision Tree (GBDT). Visto que o GBDT usava muita memória e tinha um tempo de treinamento bastante elevado, o LightGBM foi criado com o foco de acelerar o treinamento e performar de forma eficiente em conjuntos de dados massivos. O GBDT funciona percorrendo todo o conjunto de dados diversas vezes a cada iteração, o que pode causar travamentos e gargalos. Isso porque os dados podem não caber na memória, e o processo se torna mais lento devido aos acessos repetidos no armazenamento. \cite{Li2024}
+
+O LightGBM funciona por meio de um método baseado em Histogramas, onde são armazenadas características contínuas em bins discretos. Isso reduz o uso da memória e diminui o custo dos cálculos dos ganhos em cada split. Esse algoritmo também utiliza uma estratégia chamada leaf-wise, onde, em vez de expandir a árvore camada por camada, é selecionada a folha que produz maior ganho.\cite{Hajihosseinlou2023}
+
+\subsection{ENSEMBLE LEARNING}
+O ensemble learning consiste na combinação de múltiplos modelos de aprendizado de máquina com o objetivo de melhorar a capacidade de generalização e reduzir erros que modelos individuais, isoladamente, não conseguem evitar \cite{zhou2021machine}. Segundo \textcite{kazmaier2022power}, essa abordagem é especialmente promissora na análise de sentimentos, uma vez que diferentes modelos apresentam vieses indutivos distintos, cujas previsões combinadas podem compensar fraquezas individuais.
+
+Apesar de seu uso já consolidado em diversas áreas da aprendizagem de máquina, a aplicação de ensembles na análise de sentimentos ainda é limitada. Os autores destacam que ensembles heterogêneos aqueles que combinam algoritmos distintos, como SVM, Regressão Logística e redes neurais tendem a superar ensembles homogêneos, justamente por aproveitarem melhor a diversidade dos modelos base.
+
+Nos ensembles homogêneos, temos as tecnicas de bagging e boosting. O bagging é uma técnica de ensemble, com o objetivo aumentar a precisão de modelos preditivos, especialmente aqueles considerados instáveis, como árvores de decisão e redes neurais. O principal mecanismo do bagging consiste em gerar diversas versões de um mesmo modelo a partir de subconjuntos de dados obtidos por amostragem com reposição (bootstrap), e, em seguida, combinar suas previsões para formar uma decisão final mais robusta \cite{breiman1996bagging}. Já no boosting temos que é um método de aprendizado de máquina que constrói um modelo preditivo forte por meio da combinação sequencial de diversos modelos fracos (ou base learners), de forma que cada novo modelo corrige os erros cometidos pelos anteriores \cite{friedman2001greedy}.
+
+Quando falamos de ensembles heterogêneos, temos uma tecnica chamada stacking, ou stacked generalization, é uma técnica de combinação de modelos preditivos que busca melhorar a acurácia da predição ao integrar as saídas de múltiplos algoritmos de aprendizado de máquina. Diferentemente de métodos como bagging ou boosting, o stacking utiliza um modelo de segunda camada, chamado meta-modelo, que é treinado para aprender a melhor forma de combinar as previsões dos modelos de base \cite{wolpert1992stacked}. Outra técnica para \textit{ensembles} heterogêneos é a \textit{Voting}, um modelo menos complexo, mas muito eficaz. Possui duas variações: \textit{Soft Voting} e \textit{Hard Voting}.
+No \textit{Soft Voting}, a previsão é feita com base nas probabilidades que cada algoritmo calcula para cada classe. Essas probabilidades são combinadas, e a predição final é calculada por meio da média ponderada das probabilidades previstas nos modelos.
+No \textit{Hard Voting}, são computadas as predições de cada modelo para a instância do conjunto. A classe predita é definida pela maioria dos votos dos modelos, sendo, assim, estabelecida por uma votação majoritária entre os modelos que o compõem.\cite{tauil2024avaliaccao}
+
+
+\subsection{POOL DE CLASSIFICADORES}
+Pool de classificadores refere-se a um conjunto de modelos preditivos treinados (ou previamente preparados) com o objetivo de serem utilizados em técnicas de combinação ou seleção dinâmica de classificadores. Esses pools são projetados para explorar a diversidade e complementaridade entre os modelos, de forma que, mesmo que um classificador individual tenha desempenho limitado em determinadas regiões do espaço de atributos, o conjunto como um todo possa alcançar resultados superiores por meio da colaboração \cite{avelino2022abordagem, sousa2020combinacao, manastarla2024otimizacao}.
+
+\section{ANÁLISE DE SENTIMENTO}
+A Análise de Sentimento é um subcampo fundamental da classificação de textos no Processamento de Linguagem Natural (PLN), cujo objetivo principal é classificar automaticamente documentos textuais com base nos sentimentos, emoções e opiniões expressos \cite{abdar2021revisao}. Essa técnica busca identificar e extrair informações subjetivas de textos, como avaliações, comentários, postagens em redes sociais e resenhas de produtos, possibilitando uma compreensão mais aprofundada das percepções, intenções e emoções dos usuários em diferentes contextos.
+
+Com o crescimento exponencial da produção de conteúdo textual nas plataformas digitais, a análise de sentimento tornou-se uma ferramenta indispensável para a tomada de decisões. Empresas utilizam essa técnica para entender a percepção dos clientes sobre produtos e serviços, enquanto governos e organizações públicas a empregam para avaliar a opinião popular sobre políticas públicas, eventos sociais e questões econômicas \cite{onan2022arquitetura}. Nesse sentido, a análise de sentimento estabelece uma ponte entre a linguagem humana e a interpretação computacional, fornecendo insights valiosos em tempo real.
+
+A análise de sentimento pode ser dividida em duas vertentes principais: mineração de opinião e mineração de emoções. A mineração de opinião refere-se à detecção da polaridade textual, ou seja, identificar se uma determinada mensagem expressa um sentimento positivo, negativo ou neutro, além de quantificar a intensidade dessa polaridade \cite{pereira2021survey}. Por exemplo, em resenhas de produtos, é possível determinar se um cliente está satisfeito ou insatisfeito, bem como o grau de intensidade desse sentimento.
+
+\section{OPTUNA}
+O \textit{Optuna} é um otimizador de hiperparâmetros cujo funcionamento é baseado em Otimização Bayesiana. Ele serve para encontrar o melhor conjunto de parâmetros para um modelo de \textit{machine learning} e se utiliza de modelos como \textit{Tree-structured Parzen Estimator} (TPE), \textit{Covariance Matrix Adaptation} (CMA), \textit{Gaussian Processes} (GPs) e \textit{Asynchronous Successive Halving} (ASHA), oferecendo uma série de benefícios, como maior flexibilidade, eficiência e capacidade de lidar com hiperparâmetros contínuos e discretos.\cite{technologies11060167}
+
+Para um modelo \textit{performar} bem, não depende apenas dos algoritmos selecionados; os hiperparâmetros são de suma importância. Os modelos possuem uma série de hiperparâmetros que são definidos antes do treinamento, e otimizá-los é uma etapa que é muito importante, porém trabalhosa e custosa computacionalmente. Existem diversos métodos, como os tradicionais \textit{Grid Search}, \textit{Random Search} e \textit{Algoritmos Genéticos}. Porém, esses modelos de otimização possuem limitações, pois são custosos e pouco eficientes, e Algoritmos Genéticos tendem a convergir para ótimos locais. Por isso, o \textit{Optuna} vem como a solução para essas limitações, pois ele aprende continuamente com otimizações anteriores, direcionando a busca para regiões mais promissoras do espaço de parâmetros.\cite{imani2023hyperparameter, SRINIVAS2022103456}
+
+\section{SELEÇÃO}
+A eficácia de um modelo de \textit{ensemble} depende das escolhas dos classificadores que o irão compor. A simples adição de vários modelos não garante a melhoria; o ganho está fortemente ligado à seleção dos modelos, para que eles se complementem. Em outras palavras, \textit{ensembles} funcionam melhor quando seus membros cometem erros \textit{não correlacionados}. Portanto, para a seleção, é crucial considerar duas características: o \textit{desempenho individual} e a \textit{diversidade} entre os modelos, de modo a explorar variações no padrão de erro.\cite{jurek2014survey}
+
+
+Dessa forma, a seleção baseada apenas no desempenho pode ser insuficiente em alguns casos, visto que muitos modelos funcionam de forma semelhante, o que diminui o ganho coletivo.
+
+Visto que a seleção é de suma importância para a construção de \textit{ensembles} eficazes, em \textcite{yang2011classifiers}, é demonstrado que \textit{ensembles} bem-sucedidos dependem do equilíbrio entre a acurácia individual e a diversidade entre modelos, e que classificadores redundantes podem prejudicar o conjunto. A seleção é tratada como um problema de \textit{otimização}, no qual um subconjunto, retirado do \textit{pool} de classificadores, é escolhido de forma criteriosa, combinando métricas de desempenho e diversidade. Ainda em \textcite{yang2011classifiers} também é demonstrado que \textit{ensembles} menores, mas bem selecionados, performavam igual ou melhor que \textit{ensembles} completos. Isso é benéfico, pois além de manter métricas elevadas, o \textit{custo computacional} é reduzido.
+
+\section{Q-Statistic}
+
+O \textit{Q-statistic} é uma medida clássica de diversidade em \textit{ensembles}, usada para quantificar o quanto dois classificadores tendem a errar nos mesmos exemplos ou em exemplos diferentes. Em termos gerais, valores baixos de 
+Q indicam maior diversidade, o que é desejável em \textit{ensembles} que buscam combinar modelos complementares.\cite{BANFIELD200549}
+
+Segundo \textcite{wang2009diversity}, o Q-statistic pode ser definido como: dois classificadores \(L_i\) e \(L_k\) e a matriz de contingência binária sobre um conjunto de exemplos, com:
+\begin{itemize}
+\item \(N_{11}\): número de acertos simultâneos;
+\item \(N_{00}\): número de erros simultâneos;
+\item \(N_{10}\): acerto de \(L_i\) e erro de \(L_k\);
+\item \(N_{01}\): acerto de \(L_k\) e erro de \(L_i\).
+	
+\end{itemize}
+
+
+O \textit{Q-statistic} entre esses dois modelos é definido como:
+\[
+Q_{i,k} = \frac{N_{11}N_{00} - N_{01}N_{10}}{N_{11}N_{00} + N_{01}N_{10}}
+\]
+
+O valor de \(Q_{i,k}\) está no intervalo \([-1, 1]\), em que valores próximos de 1 indicam classificadores altamente correlacionados, valores próximos de 0 indicam pouca correlação e valores negativos indicam forte comportamento complementar.
